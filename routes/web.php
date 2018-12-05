@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('cuentas','CuentaController');
 Route::resource('categorias','CategoriaController');
+Route::resource('clientes','ClienteGaranteController');
