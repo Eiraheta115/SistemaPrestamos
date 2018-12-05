@@ -1,0 +1,3 @@
+https://mpjprestamos.herokuapp.com/ 
+https://mpjprestamos.herokuapp.com/register
+https://mpjprestamos.herokuapp.com/login
