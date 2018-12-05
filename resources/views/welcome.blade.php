@@ -14,13 +14,12 @@
         </script>
 
         <title>MPJ Prestamos!</title>
-        <meta name="description" content=""/>
-        <meta name="keywords" content=""/>
+        <meta name="description" content="Sitio de realización de préstamos."/>
+        <meta name="keywords" content="Fundación, Mensajeros, Peregrinos, Jesús, Préstamos, Clientes, Cuentas"/>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        
-        <!-- Bootstrap CSS -->
+              <!-- Bootstrap CSS -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         
         <!-- Font Awesome CSS -->
