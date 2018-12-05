@@ -8,7 +8,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
   <title>MPJ Prestamos</title>
 
   <link rel="stylesheet" href="/css/app.css">
@@ -45,7 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="./img/MPJ.png" alt="MPJ JimonHombre!" class="brand-image img-circle elevation-3"
+      <img src="/img/MPJ.png" alt="" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">MPJ Prestamos!</span>
     </a>
@@ -55,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="./img/user.png" class="img-circle elevation-2" alt="User Image">
+          <img src="/img/user.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{Auth::user()->name}}</a>
@@ -68,7 +67,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('home') }}" class="nav-link">
               <i class="nav-icon fa fa-home "></i>
               <p>
                 Principal
@@ -107,7 +106,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('categorias.index') }}" class="nav-link">
               <i class="nav-icon fa fa-list-ol"></i>
               <p>
                 Categorias
@@ -115,18 +114,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('cuentas.index') }}" class="nav-link">
               <i class="nav-icon fa fa-university "></i>
               <p>
                 Cuentas
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
-              <p>
-                Perfil
               </p>
             </a>
           </li>
@@ -154,7 +145,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-
+        @yield('content')
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content -->
@@ -173,6 +164,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- ./wrapper -->
 <script src="/js/app.js"></script>
-@yield('content')
 </body>
 </html>

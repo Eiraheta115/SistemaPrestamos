@@ -1,98 +1,88 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+    
+<!-- Mirrored from themes.lucky-roo.com/berg-v3.1/html/profile-custom-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 02 Sep 2018 20:02:43 GMT -->
+<head>
+        <title>MPJ Prestamos!</title>
+        <meta name="description" content=""/>
+        <meta name="keywords" content=""/>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <!-- Bootstrap CSS -->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        
+        <!-- Font Awesome CSS -->
+        <link href="assets/css/icons-mind.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        
+        <!-- Include all css plugins (below), or include individual files as needed -->
+        <link href="assets/css/magnific-popup.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/flexslider.css" rel="stylesheet" type="text/css">
+        
+        <!-- Theme CSS -->
+        <link href="assets/css/theme.min.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+        
+        <!-- Color Scheme CSS -->
+        <link href="assets/css/color_pink.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/switch_style.css" rel="stylesheet" type="text/css">
     </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
+    <body id="page-top">
+        
+        <!-- Style Switch Start -->
+        <link id="switch-style" href="#" rel="stylesheet" type="text/css">
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+        <!-- //Style Switch End -->
+        
+        
+        <!-- Section - Home Start -->
+        <section id="home" class="home-bg-static bg-cover bg-gray-dark bg-overlay-black-5 w-100">
+            <div class="container h-100">
+                <div class="row align-items-center h-100 justify-content-center">
+                    <div class="col-lg-9 text-center">
+                        <h2 class="font-alt font-w-600 letter-spacing-2 m-0 mt-3 opacity-9-5 text-uppercase text-white title-sm-extra-large-2 title-extra-large-4">Sistema de prestamos</h2>
+                        <span class="d-block font-alt mt-2 opacity-9-5 text-white title-sm-extra-large title-extra-large-3">Bienvenido</span>
+                        <span class="d-block font-alt mb-2 mt-2 opacity-9-5 text-white text-extra-large">Este es el sistema de manejo de prestamos de MPJ</span>
+                        <a href="{{ route('register') }}" class="page-scroll btn box-shadow-wide btn-base-color btn-large m-0 mt-4">Comencemos</a>
+                    </div>
+                    <!-- //.col-lg-9 -->
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <!-- //.row -->
             </div>
-        </div>
-    </body>
-</html>
+            <!-- //.container -->
+        </section>
+        <!-- //Section - Home End -->
+        
+        
+        <!-- Navigation Start -->
+        <nav id="navigation" class="navbar navbar-dark navbar-expand-lg bg-dark">
+            <div class="container">
+                <div class="navbar-header d-lg-none">
+                    <a class="navbar-brand page-scroll" href="#page-top">BERG</a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-berg" aria-controls="navbar-berg" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <!-- //.navbar-header -->
+                
+                <div class="navbar-collapse collapse justify-content-center" id="navbar-berg">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link page-scroll" href="{{ route('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link page-scroll" href="{{ route('register') }}">Registrate</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link page-scroll" href="http://www.fundacionmpj.org/">Fanpage</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- //.navbar-collapse -->
+            </div>
+            <!-- //.container -->
+        </nav>
+        
