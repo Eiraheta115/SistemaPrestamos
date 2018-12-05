@@ -3,6 +3,16 @@
     
 <!-- Mirrored from themes.lucky-roo.com/berg-v3.1/html/profile-custom-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 02 Sep 2018 20:02:43 GMT -->
 <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130478309-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-130478309-1');
+        </script>
+
         <title>MPJ Prestamos!</title>
         <meta name="description" content=""/>
         <meta name="keywords" content=""/>
