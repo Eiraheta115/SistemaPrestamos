@@ -89,7 +89,7 @@
         <nav id="navigation" class="navbar navbar-dark navbar-expand-lg bg-dark">
             <div class="container">
                 <div class="navbar-header d-lg-none">
-                    <a class="navbar-brand page-scroll" href="#page-top">BERG</a>
+                    <a class="navbar-brand page-scroll" href="#page-top">MPJ</a>
                     
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-berg" aria-controls="navbar-berg" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
