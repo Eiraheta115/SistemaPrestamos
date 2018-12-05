@@ -173,7 +173,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <footer class="main-footer">
     <!-- To the right -->
     <div class="float-right d-none d-sm-inline">
-      Slogan!
+        Tu sistema de préstamos para ayudar
     </div>
     <!-- Default to the left -->
     <strong>MPJ 2018 <a href="http://www.fundacionmpj.org/">Fundacion MPJ</a></strong>
