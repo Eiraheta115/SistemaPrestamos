@@ -113,4 +113,27 @@
             </div>
             <!-- //.container -->
         </nav>
+                <!-- Scroll to top -->
+                <a href="#page-top" class="page-scroll scroll-to-top bg-base-color"><i class="fa fa-angle-up"></i></a>
         
+        
+                <!-- Main JS -->
+                <script src="assets/js/jquery.min.js"></script>
+                <script src="assets/js/popper.min.js"></script>
+                <script src="assets/js/bootstrap.min.js"></script>
+                
+                <!-- Include all js plugins (below) -->
+                <script src="assets/js/pace.min.js"></script>
+                <script src="assets/js/jquery.sticky.js"></script>
+                <script src="assets/js/jquery.easing.min.js"></script>
+                <script src="assets/js/jquery.matchHeight.min.js"></script>
+                <script src="assets/js/jquery.inview.min.js"></script>
+                <script src="assets/js/jquery.countTo.js"></script>
+                <script src="assets/js/imagesloaded.pkgd.min.js"></script>
+                <script src="assets/js/jquery.magnific-popup.min.js"></script>
+                <script src="assets/js/jquery.flexslider.min.js"></script>
+                <script src="assets/js/jquery.validate.min.js"></script>
+                
+                <!-- Theme JS -->
+                <script src="assets/js/theme.js"></script>
+                <script src="assets/js/switch_style.js"></script>
