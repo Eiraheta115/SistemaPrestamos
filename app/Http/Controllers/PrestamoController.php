@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\prestamo;
+use App\clienteGarante;
 use Illuminate\Http\Request;
 use Session;
 class PrestamoController extends Controller
@@ -25,7 +26,8 @@ class PrestamoController extends Controller
      */
     public function create()
     {
-        return view('prestamos.create');
+        $clientes = clienteGarante::paginate(10);
+        return view('prestamos.create', compact('clientes'));
     }
 
     /**

@@ -15,11 +15,15 @@ class CreatePrestamosTable extends Migration
     {
         Schema::create('prestamos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cliente_id');
+            $table->integer('cliente_id')->unsigned();
             $table->decimal('monto',6,2);
             $table->integer('plazo');
             $table->decimal('interes',6,2);
+            $table->decimal('interesMoratorio',6,2);
+            $table->date('fecha');
             $table->timestamps();
+
+            $table->foreing('cliente_id')->references('id')->on('cliente_garantes');
         });
     }
 

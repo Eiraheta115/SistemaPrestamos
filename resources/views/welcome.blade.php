@@ -37,7 +37,6 @@
         <!-- Color Scheme CSS -->
         <link href="assets/css/color_pink.css" rel="stylesheet" type="text/css">
         <link href="assets/css/switch_style.css" rel="stylesheet" type="text/css">
-
         <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
