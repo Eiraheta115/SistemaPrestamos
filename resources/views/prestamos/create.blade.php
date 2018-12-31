@@ -282,6 +282,7 @@
     while ( tableRef.rows.length > 0 )
     {
       tableRef.deleteRow(0);
+      tableRef.deleteTHead();
     }
     //Creando encabezado de tabla
     var orderArrayHeader = ["N° Cuota","Fecha","Monto","Interes","Interes moratorio", "Pagado"];
