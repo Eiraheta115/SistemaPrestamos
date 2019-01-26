@@ -15,44 +15,46 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Rango inicial</th>
-          <th>Rango final</th>
-          <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($categorias as $categoria)
-        <tr>
-            <td>{{$categoria->id}}</td>
-            <td>{{$categoria->nombre}}</td>
-            <td>{{$categoria->rangoInicial}}</td>
-            <td>{{$categoria->rangoFinal}}</td>
-            <td><a class="btn btn-primary btn-flat mt-2" href="{{route('categorias.edit', $categoria->id)}}"><i class="fas fa-edit"></i></a>
-              <form action="{{route('categorias.destroy', $categoria->id)}}" method="POST">
-                @csrf
-                @method('DELETE')
-              <button type="submit" class="btn btn-primary btn-danger mt-2" onclick="return confirm('¿Esta seguro/a de inhabilitar la categoria?')">
-                <i class="fas fa-ban"></i></button>
-              </form>
-        </tr>
-          </td>
-        @endforeach
-        </tbody>
-        <tfoot>
-        <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Rango inicial</th>
-                <th>Rango final</th>
-                <th>Acciones</th>
-        </tr>
-        </tfoot>
-      </table>
+      <div class="table-responsive">
+        <table id="example1" class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Rango inicial</th>
+            <th>Rango final</th>
+            <th>Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach ($categorias as $categoria)
+          <tr>
+              <td>{{$categoria->id}}</td>
+              <td>{{$categoria->nombre}}</td>
+              <td>{{$categoria->rangoInicial}}</td>
+              <td>{{$categoria->rangoFinal}}</td>
+              <td><a class="btn btn-primary btn-flat mt-2" href="{{route('categorias.edit', $categoria->id)}}"><i class="fas fa-edit"></i></a>
+                <form action="{{route('categorias.destroy', $categoria->id)}}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                <button type="submit" class="btn btn-primary btn-danger mt-2" onclick="return confirm('¿Esta seguro/a de inhabilitar la categoria?')">
+                  <i class="fas fa-ban"></i></button>
+                </form>
+          </tr>
+            </td>
+          @endforeach
+          </tbody>
+          <tfoot>
+          <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Rango inicial</th>
+                  <th>Rango final</th>
+                  <th>Acciones</th>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
       <br>
       {{ $categorias->links()}}
     </div>

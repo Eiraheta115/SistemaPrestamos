@@ -15,29 +15,10 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>Fecha</th>
-          <th>Solicitante</th>
-          <th>Monto prestamo</th>
-          <th>plazo</th>
-          <th>intereses</th>
-          <th>Ultimo pago</th>
-          <th>Estado</th>
-          <th>Acciones</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($prestamos as $prestamo)
-        <tr>
-            <td>{{$prestamo->id}}</td>
-        </tr>
-        @endforeach
-        </tbody>
-        <tfoot>
-        <tr>
+      <div class="table-responsive">
+        <table id="example1" class="table table-bordered table-striped">
+          <thead>
+          <tr>
             <th>ID</th>
             <th>Fecha</th>
             <th>Solicitante</th>
@@ -47,9 +28,30 @@
             <th>Ultimo pago</th>
             <th>Estado</th>
             <th>Acciones</th>
-        </tr>
-        </tfoot>
-      </table>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach ($prestamos as $prestamo)
+          <tr>
+              <td>{{$prestamo->id}}</td>
+          </tr>
+          @endforeach
+          </tbody>
+          <tfoot>
+          <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Solicitante</th>
+              <th>Monto prestamo</th>
+              <th>plazo</th>
+              <th>intereses</th>
+              <th>Ultimo pago</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
       <br>
       {{ $prestamos->links()}}
     </div>

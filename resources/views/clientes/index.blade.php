@@ -15,39 +15,10 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table id="example1" class="table table-bordered table-striped">
-        <thead>
-        <tr>
-          <th>ID</th>
-          <th>DUI</th>
-          <th>Nombres</th>
-          <th>Email</th>
-          <th>Telefono</th>
-          <th>Celular</th>
-          <th>Garante</th>
-          <th>Garante Email</th>
-          <th>Garante Telefono</th>
-          <th>Garante Celular</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach ($clientes as $clienteGarante)
-        <tr>
-            <td>{{$clienteGarante->id}}</td>
-            <td>{{$clienteGarante->clienteDui}}</td>
-            <td>{{$clienteGarante->clienteNombre}}</td>
-            <td>{{$clienteGarante->clienteEmail}}</td>
-            <td>{{$clienteGarante->clienteTelefono}}</td>
-            <td>{{$clienteGarante->clienteCelular}}</td>
-            <td>{{$clienteGarante->garanteNombre}}</td>
-            <td>{{$clienteGarante->garanteEmail}}</td>
-            <td>{{$clienteGarante->garanteTelefono}}</td>
-            <td>{{$clienteGarante->garanteCelular}}</td>
-        </tr>
-        @endforeach
-        </tbody>
-        <tfoot>
-        <tr>
+      <div class="table-responsive">
+        <table id="example1" class="table table-bordered table-striped">
+          <thead>
+          <tr>
             <th>ID</th>
             <th>DUI</th>
             <th>Nombres</th>
@@ -58,9 +29,40 @@
             <th>Garante Email</th>
             <th>Garante Telefono</th>
             <th>Garante Celular</th>
-        </tr>
-        </tfoot>
-      </table>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach ($clientes as $clienteGarante)
+          <tr>
+              <td>{{$clienteGarante->id}}</td>
+              <td>{{$clienteGarante->clienteDui}}</td>
+              <td>{{$clienteGarante->clienteNombre}}</td>
+              <td>{{$clienteGarante->clienteEmail}}</td>
+              <td>{{$clienteGarante->clienteTelefono}}</td>
+              <td>{{$clienteGarante->clienteCelular}}</td>
+              <td>{{$clienteGarante->garanteNombre}}</td>
+              <td>{{$clienteGarante->garanteEmail}}</td>
+              <td>{{$clienteGarante->garanteTelefono}}</td>
+              <td>{{$clienteGarante->garanteCelular}}</td>
+          </tr>
+          @endforeach
+          </tbody>
+          <tfoot>
+          <tr>
+              <th>ID</th>
+              <th>DUI</th>
+              <th>Nombres</th>
+              <th>Email</th>
+              <th>Telefono</th>
+              <th>Celular</th>
+              <th>Garante</th>
+              <th>Garante Email</th>
+              <th>Garante Telefono</th>
+              <th>Garante Celular</th>
+          </tr>
+          </tfoot>
+        </table>
+      </div>
       <br>
       {{ $clientes->links()}}
     </div>

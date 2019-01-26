@@ -22,3 +22,5 @@ Route::resource('cuentas','CuentaController');
 Route::resource('categorias','CategoriaController');
 Route::resource('clientes','ClienteGaranteController');
 Route::resource('prestamos','PrestamoController');
+
+Route::get('/user/{id}', 'UserControl@show')->name('userShow');

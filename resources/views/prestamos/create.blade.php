@@ -34,35 +34,37 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <table id="clientes" class="table table-bordered table-striped table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>DUI</th>
-                                                        <th>Nombres</th>
-                                                        <th>Seleccionado</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($clientes as $clienteGarante)
-                                                    <tr>
-                                                        <td>{{$clienteGarante->id}}</td>
-                                                        <td>{{$clienteGarante->clienteDui}}</td>
-                                                        <td>{{$clienteGarante->clienteNombre}}</td>
-                                                        <td><a class="btn btn-primary btn-lg ml-4" onClick="autoFill('{{$clienteGarante->clienteDui}}','{{$clienteGarante->clienteNombre}}','{{$clienteGarante->clienteTelefono}}','{{$clienteGarante->clienteCelular}}'); return true;">Elegir</a>
-                                                    </tr>
-
-                                                    @endforeach
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>DUI</th>
-                                                        <th>Nombres</th>
-                                                        <th>Seleccionado</th>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
+                                            <div class="table-responsive">
+                                                <table id="clientes" class="table table-bordered table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>DUI</th>
+                                                            <th>Nombres</th>
+                                                            <th>Seleccionado</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($clientes as $clienteGarante)
+                                                        <tr>
+                                                            <td>{{$clienteGarante->id}}</td>
+                                                            <td>{{$clienteGarante->clienteDui}}</td>
+                                                            <td>{{$clienteGarante->clienteNombre}}</td>
+                                                            <td><a class="btn btn-primary btn-lg ml-4" onClick="autoFill('{{$clienteGarante->clienteDui}}','{{$clienteGarante->clienteNombre}}','{{$clienteGarante->clienteTelefono}}','{{$clienteGarante->clienteCelular}}'); return true;">Elegir</a>
+                                                        </tr>
+    
+                                                        @endforeach
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>DUI</th>
+                                                            <th>Nombres</th>
+                                                            <th>Seleccionado</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
                                             <br>
                                             {{ $clientes->links()}}
                                         </div>
@@ -216,8 +218,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <table id="pagos" class="table table-bordered table-striped table-hover">
-                                            </table>
+                                            <div class="table-responsive">
+                                                <table id="pagos" class="table table-bordered table-striped table-hover">
+                                                </table>
+                                            </div>
                                             <br>
                                         </div>
                                         <div class="modal-footer">

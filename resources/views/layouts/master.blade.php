@@ -44,7 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <input id="userFindInputText" class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" onclick="window.find();">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
             <i class="fa fa-search"></i>
@@ -74,7 +74,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="/img/user.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->name}}</a>
+          <a href="{{route('userShow', Auth::user()->id)}}" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -181,5 +181,59 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </div>
 <!-- ./wrapper -->
 <script src="/js/app.js"></script>
+<script src="/js/dist/mark.min.js"></script>
 </body>
+<link rel="stylesheet" href="/path/to/styles/default.css">
+<script src="/path/to/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 </html>
+<script type="text/javascript">        
+
+  (function($){
+
+      $(function(){
+
+          // REMOVE THIS LINE once its working
+          if (!$.fn.highlight) { alert("Hightlight Plugin NOT LOADED!"); }
+
+
+          var classNames      = "ms-status-yellow s4-status-s3 highlight",
+              currentKeyword  = '',
+              $container      = $("#s4-workspace"), // This selector assumes SP2010/2013. Use "body" if on SP2007
+              highlight       = function(){
+
+                  var findText = $("#userFindInputText").val();
+
+                  if (!findText) {
+
+                      alert("Enter a search value");
+                      return this;
+
+                  }
+
+                  // Unhighlight any previous keywords
+                  if (currentKeyword) {
+
+                      $container.unhighlight({className: "highlight"});                            
+                  }
+
+                  currentKeyword = findText;
+                  $container.highlight(findText, {className: classNames});                        
+                  return this;
+              };
+
+          $("#userFindInputText").on("keyup", function(ev){
+              if (ev.which === 13) {
+
+                  highlight.apply(this, arguments);
+
+              }
+          });
+
+          $("#userFindInputButton").on("click", highlight)
+
+      });
+
+  })(jQuery);
+
+</script>
