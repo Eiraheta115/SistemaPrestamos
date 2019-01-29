@@ -188,52 +188,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>hljs.initHighlightingOnLoad();</script>
 </html>
 <script type="text/javascript">        
-
   (function($){
-
       $(function(){
-
           // REMOVE THIS LINE once its working
-          if (!$.fn.highlight) { alert("Hightlight Plugin NOT LOADED!"); }
-
-
+          //if (!$.fn.highlight) { alert("Hightlight Plugin NOT LOADED!"); }
           var classNames      = "ms-status-yellow s4-status-s3 highlight",
               currentKeyword  = '',
               $container      = $("#s4-workspace"), // This selector assumes SP2010/2013. Use "body" if on SP2007
               highlight       = function(){
-
                   var findText = $("#userFindInputText").val();
-
                   if (!findText) {
-
                       alert("Enter a search value");
                       return this;
-
                   }
-
                   // Unhighlight any previous keywords
                   if (currentKeyword) {
-
                       $container.unhighlight({className: "highlight"});                            
                   }
-
                   currentKeyword = findText;
                   $container.highlight(findText, {className: classNames});                        
                   return this;
               };
-
           $("#userFindInputText").on("keyup", function(ev){
               if (ev.which === 13) {
-
                   highlight.apply(this, arguments);
-
               }
           });
-
           $("#userFindInputButton").on("click", highlight)
-
       });
-
   })(jQuery);
-
 </script>

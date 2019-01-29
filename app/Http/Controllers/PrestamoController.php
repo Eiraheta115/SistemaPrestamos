@@ -38,7 +38,27 @@ class PrestamoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'clienteDui' => 'required',
+            'monto' => 'required',
+            'plazo' => 'required',
+            'interes' => 'required',
+            'interesMoratorio' => 'required',
+            'fecha' => 'required'
+        ]);
+
+        $cliente= clienteGarante::where('clienteDui',$request->clienteDui)->first();
+        $prestamo = new prestamo;
+        $prestamo->monto=$request->monto;
+        $prestamo->plazo=$request->plazo;
+        $prestamo->interes=$request->interes;
+        $prestamo->interesMoratorio=$request->interesMoratorio;
+        $prestamo->fecha=$request->fecha;
+        //$prestamo->clientes()->associate($cliente);
+        //$prestamo->save();
+        $cliente->prestamos()->save($prestamo);
+        Session::flash('Mensaje', 'Prestamo creado exitosamente');
+        return redirect()->route('prestamos.index');
     }
 
     /**

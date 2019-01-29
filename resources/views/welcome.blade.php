@@ -9,7 +9,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'UA-130478309-1');
         </script>
 
@@ -72,7 +71,7 @@
                         <h2 class="font-alt font-w-600 letter-spacing-2 m-0 mt-3 opacity-9-5 text-uppercase text-white title-sm-extra-large-2 title-extra-large-4">Sistema de prestamos</h2>
                         <span class="d-block font-alt mt-2 opacity-9-5 text-white title-sm-extra-large title-extra-large-3">Bienvenido</span>
                         <span class="d-block font-alt mb-2 mt-2 opacity-9-5 text-white text-extra-large">Este es el sistema de manejo de prestamos de MPJ</span>
-                        <a href="{{ route('register') }}" class="page-scroll btn box-shadow-wide btn-base-color btn-large m-0 mt-4">Comencemos</a>
+                        <a href="{{ route('login') }}" class="page-scroll btn box-shadow-wide btn-base-color btn-large m-0 mt-4">Comencemos</a>
                     </div>
                     <!-- //.col-lg-9 -->
                 </div>
@@ -135,4 +134,4 @@
                 
                 <!-- Theme JS -->
                 <script src="assets/js/theme.js"></script>
-                <script src="assets/js/switch_style.js"></script>
+<script src="assets/js/switch_style.js"></script>

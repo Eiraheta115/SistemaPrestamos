@@ -23,17 +23,20 @@
             <th>Fecha</th>
             <th>Solicitante</th>
             <th>Monto prestamo</th>
-            <th>plazo</th>
+            <th>plazos</th>
             <th>intereses</th>
-            <th>Ultimo pago</th>
-            <th>Estado</th>
-            <th>Acciones</th>
           </tr>
           </thead>
           <tbody>
           @foreach ($prestamos as $prestamo)
           <tr>
               <td>{{$prestamo->id}}</td>
+              <td>{{$prestamo->fecha}}</td>
+              <td>{{$prestamo->clientes->clienteNombre}}</td>
+              <td>{{$prestamo->monto}}</td>
+              <td>{{$prestamo->plazo}}</td>
+              <td>{{$prestamo->interes}}</td>
+
           </tr>
           @endforeach
           </tbody>
@@ -43,11 +46,8 @@
               <th>Fecha</th>
               <th>Solicitante</th>
               <th>Monto prestamo</th>
-              <th>plazo</th>
+              <th>plazos</th>
               <th>intereses</th>
-              <th>Ultimo pago</th>
-              <th>Estado</th>
-              <th>Acciones</th>
           </tr>
           </tfoot>
         </table>
