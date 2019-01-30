@@ -109,13 +109,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-              <a href="{{route('prestamos.index')}}" class="nav-link active">
+              <a href="{{route('prestamos.create')}}" class="nav-link active">
                   <i class="fa fa-book-open "></i>
                   <p>Registro</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('prestamos.index')}}" class="nav-link">
                   <i class="fa fa-dollar-sign"></i>
                   <p>Cuotas</p>
                 </a>

@@ -49,14 +49,15 @@ class PrestamoController extends Controller
 
         $cliente= clienteGarante::where('clienteDui',$request->clienteDui)->first();
         $prestamo = new prestamo;
+        $prestamo->cliente_id=$cliente->id;
         $prestamo->monto=$request->monto;
         $prestamo->plazo=$request->plazo;
         $prestamo->interes=$request->interes;
         $prestamo->interesMoratorio=$request->interesMoratorio;
         $prestamo->fecha=$request->fecha;
-        //$prestamo->clientes()->associate($cliente);
-        //$prestamo->save();
-        $cliente->prestamos()->save($prestamo);
+        $prestamo->save();
+        $prestamo->clientes()->save($cliente);
+        $prestamo->save();  
         Session::flash('Mensaje', 'Prestamo creado exitosamente');
         return redirect()->route('prestamos.index');
     }

@@ -11,6 +11,6 @@ class clienteGarante extends Model
        ];
 
     public function prestamos(){
-        return $this->hasMany('App\prestamo', 'cliente_id');
+        return $this->belongsTo('App\prestamo', 'cliente_id');
     }
 }

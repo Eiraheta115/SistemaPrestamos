@@ -9,7 +9,7 @@
 @endif
 <div class="card">
     <div class="card-header">
-    <a class="btn btn-primary btn-flat mt-2" href="{{route('prestamos.create')}}" style="float: right;">Registrar prestamos</a>
+    
       <h3 class="card-title mt-3">Lista de prestamos</h3>
       
     </div>
@@ -32,7 +32,7 @@
           <tr>
               <td>{{$prestamo->id}}</td>
               <td>{{$prestamo->fecha}}</td>
-              <td>{{$prestamo->clientes->clienteNombre}}</td>
+              <td>{{$prestamo->clientes['clienteNombre']}}</td>
               <td>{{$prestamo->monto}}</td>
               <td>{{$prestamo->plazo}}</td>
               <td>{{$prestamo->interes}}</td>
