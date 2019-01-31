@@ -19,12 +19,14 @@
         <table id="example1" class="table table-bordered table-striped">
           <thead>
           <tr>
-            <th>ID</th>
+            <th>N°</th>
             <th>Fecha</th>
             <th>Solicitante</th>
             <th>Monto prestamo</th>
+            <th>Saldo</th>
             <th>plazos</th>
             <th>intereses</th>
+            <th>Ver detalle</th>
           </tr>
           </thead>
           <tbody>
@@ -34,20 +36,24 @@
               <td>{{$prestamo->fecha}}</td>
               <td>{{$prestamo->clientes['clienteNombre']}}</td>
               <td>{{$prestamo->monto}}</td>
+              <td>{{$prestamo->saldo}}</td>
               <td>{{$prestamo->plazo}}</td>
               <td>{{$prestamo->interes}}</td>
+              <td><a class="btn btn-primary btn-flat mt-2" href="{{route('prestamoDetalle', $prestamo->id)}}"><i class="fas fa-eye"></i></a></td>
 
           </tr>
           @endforeach
           </tbody>
           <tfoot>
           <tr>
-              <th>ID</th>
+              <th>N°</th>
               <th>Fecha</th>
               <th>Solicitante</th>
               <th>Monto prestamo</th>
+              <th>Saldo</th>
               <th>plazos</th>
               <th>intereses</th>
+              <th>Ver detalle</th>
           </tr>
           </tfoot>
         </table>

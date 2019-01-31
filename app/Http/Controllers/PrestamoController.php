@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\prestamo;
 use App\clienteGarante;
+use App\cuota;
 use Illuminate\Http\Request;
 use Session;
+use DateTime;
+
 class PrestamoController extends Controller
 {
     /**
@@ -51,6 +54,7 @@ class PrestamoController extends Controller
         $prestamo = new prestamo;
         $prestamo->cliente_id=$cliente->id;
         $prestamo->monto=$request->monto;
+        $prestamo->saldo=$request->monto;
         $prestamo->plazo=$request->plazo;
         $prestamo->interes=$request->interes;
         $prestamo->interesMoratorio=$request->interesMoratorio;
@@ -58,6 +62,27 @@ class PrestamoController extends Controller
         $prestamo->save();
         $prestamo->clientes()->save($cliente);
         $prestamo->save();  
+        
+        //creando cuota
+        $cuotas=array();
+        $fee=round($request->monto/$request->plazo, 2);
+        $plazos=$request->plazo;
+        $nextDate = date_create_from_format("Y-m-d", (string)$request->fecha);
+        for ($p=0; $p<$plazos; $p++){
+            $nextDate =date_add($nextDate, date_interval_create_from_date_string('30 days'));
+            $cuotas[]=[
+                'prestamo_id'=>$prestamo->id,
+                'fechaPago' =>$nextDate,
+                'monto'=> $fee,
+                'saldoCuota'=>$fee,
+                'interes'=>0.00,
+                'interesMoratorio'=>0.00,
+                'cancelado'=>false
+            ];
+
+        }
+
+        $prestamo->cuotas()->createMany($cuotas);
         Session::flash('Mensaje', 'Prestamo creado exitosamente');
         return redirect()->route('prestamos.index');
     }
@@ -105,5 +130,10 @@ class PrestamoController extends Controller
     public function destroy(prestamo $prestamo)
     {
         //
+    }
+
+    public function mostrar(Request $request, $id){
+        $prestamo=prestamo::find($id);
+        return view('prestamos.detalle', compact('prestamo'));
     }
 }

@@ -9,4 +9,8 @@ class prestamo extends Model
     public function clientes(){
         return $this->hasOne('App\clienteGarante', 'id');
     }
+
+    public function cuotas(){
+        return $this->hasMany('App\cuota', 'prestamo_id');
+    }
 }
