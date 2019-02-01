@@ -62,14 +62,13 @@ class PrestamoController extends Controller
         $prestamo->save();
         $prestamo->clientes()->save($cliente);
         $prestamo->save();  
-        
         //creando cuota
         $cuotas=array();
         $fee=round($request->monto/$request->plazo, 2);
         $plazos=$request->plazo;
-        $nextDate = date_create_from_format("Y-m-d", (string)$request->fecha);
+        $nextDate = $request->fecha;
         for ($p=0; $p<$plazos; $p++){
-            $nextDate =date_add($nextDate, date_interval_create_from_date_string('30 days'));
+            $nextDate =date('Y-m-d', strtotime($nextDate. ' + 30 days'));
             $cuotas[]=[
                 'prestamo_id'=>$prestamo->id,
                 'fechaPago' =>$nextDate,
@@ -78,10 +77,10 @@ class PrestamoController extends Controller
                 'interes'=>0.00,
                 'interesMoratorio'=>0.00,
                 'cancelado'=>false
+                
             ];
-
         }
-
+        //dd($cuotas);
         $prestamo->cuotas()->createMany($cuotas);
         Session::flash('Mensaje', 'Prestamo creado exitosamente');
         return redirect()->route('prestamos.index');
