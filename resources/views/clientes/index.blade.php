@@ -31,7 +31,7 @@
             <th>Garante Celular</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody id="myTable">
           @foreach ($clientes as $clienteGarante)
           <tr>
               <td>{{$clienteGarante->id}}</td>

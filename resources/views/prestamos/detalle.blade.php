@@ -122,7 +122,7 @@
                       <th>cancelado</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="myTable">
                     @foreach ($prestamo->cuotas as $indexKey =>$cuota)
                     <tr>
                         <td>{{$indexKey+1}}</td>

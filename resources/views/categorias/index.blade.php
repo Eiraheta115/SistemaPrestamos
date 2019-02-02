@@ -26,7 +26,7 @@
             <th>Acciones</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody id="myTable">
           @foreach ($categorias as $categoria)
           <tr>
               <td>{{$categoria->id}}</td>

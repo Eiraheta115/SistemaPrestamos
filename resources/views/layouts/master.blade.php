@@ -36,15 +36,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
-      <li class="nav-item">
+      <li class="nav-item" >
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
       </li>
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <form class="form-inline ml-3" position: fixed;>
       <div class="input-group input-group-sm">
-        <input id="userFindInputText" class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" onclick="window.find();">
+        <input id="myInput" class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search" onclick="window.find();">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
             <i class="fa fa-search"></i>
@@ -52,7 +52,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
       </div>
     </form>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+    </script>
 
   </nav>
   <!-- /.navbar -->
@@ -157,7 +167,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <div class="content-wrapper" style="margin-top:50px">
 
     <!-- Main content -->
     <div class="content">

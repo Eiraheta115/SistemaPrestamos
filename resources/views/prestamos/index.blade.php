@@ -29,7 +29,7 @@
             <th>Ver detalle</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody id="myTable">
           @foreach ($prestamos as $prestamo)
           <tr>
               <td>{{$prestamo->id}}</td>
