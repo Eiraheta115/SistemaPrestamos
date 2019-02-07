@@ -1,9 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-@php
- $i=0   
-@endphp
+
 <br>
 <div class="card card-default">
     <div class="card-header">
@@ -22,7 +20,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">DUI</span>
                         </div>
-                        <input type="text" name="clienteDui" id="clienteDui" class="form-control dui" value="{{$prestamo->clientes['clienteDui']}}" disabled>
+                        <input type="text" name="clienteDui" id="clienteDui" class="form-control dui" value="{{$detalle->cliente->clienteDui}}" disabled>
 
                     </div>
                 </div>
@@ -34,7 +32,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Nombre</span>
                             </div>
-                            <input type="text" name="clienteNombre" id="clienteNombre" class="form-control nombre" value="{{$prestamo->clientes['clienteNombre']}}" disabled>
+                            <input type="text" name="clienteNombre" id="clienteNombre" class="form-control nombre" value="{{$detalle->cliente->clienteNombre}}" disabled>
                         </div>
                     </div>
                 </div>
@@ -45,7 +43,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Telefono</span>
                             </div>
-                            <input type="text" name="clienteTelefono" id="clienteTelefono" class="form-control telefono" value="{{$prestamo->clientes['clienteTelefono']}}" disabled>
+                            <input type="text" name="clienteTelefono" id="clienteTelefono" class="form-control telefono" value="{{$detalle->cliente->clienteTelefono}}" disabled>
                         </div>
                     </div>
                 </div>
@@ -61,7 +59,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Monto</span>
                             </div>
-                        <input type="text" name="prestamoMonto" id="prestamoMonto" class="form-control prestamoMonto" value="{{$prestamo->monto}}" disabled>
+                        <input type="text" name="prestamoMonto" id="prestamoMonto" class="form-control prestamoMonto" value="{{$detalle->prestamo->monto}}" disabled>
                         </div>
                     </div>
                 </div>
@@ -73,7 +71,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">saldo</span>
                             </div>
-                        <input type="text" name="prestamoSaldo" id="prestamoSaldo" class="form-control prestamoSaldo" value="{{$prestamo->saldo}}" disabled>
+                        <input type="text" name="prestamoSaldo" id="prestamoSaldo" class="form-control prestamoSaldo" value="{{$detalle->prestamo->saldo}}" disabled>
                         </div>
                     </div>
                 </div>
@@ -84,7 +82,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">email @</span>
                             </div>
-                        <input type="text" name="clienteEmail" id="clienteEmail" class="form-control clienteEmail" value="{{$prestamo->clientes['clienteEmail']}}" disabled>
+                        <input type="text" name="clienteEmail" id="clienteEmail" class="form-control clienteEmail" value="{{$detalle->cliente->clienteEmail}}" disabled>
                         </div>
                     </div>
                 </div>
@@ -123,16 +121,17 @@
                     </tr>
                     </thead>
                     <tbody id="myTable">
-                    @foreach ($prestamo->cuotas as $indexKey =>$cuota)
+                    @foreach ($detalle->prestamo->c as $indexKey =>$cuota)
+                   
                     <tr>
                         <td>{{$indexKey+1}}</td>
-                        <td>{{$cuota['fechaPago']}}</td>
-                        <td>{{$cuota['monto']}}</td>
-                        <td>{{$cuota['saldoCuota']}}</td>
-                        <td>{{$cuota['interes']}}</td>
-                        <td>{{$cuota['interesMoratorio']}}</td>
+                        <td>{{$cuota->fechaPago}}</td>
+                        <td>{{$cuota->monto}}</td>
+                        <td>{{$cuota->saldoCuota}}</td>
+                        <td>{{$cuota->interes}}</td>
+                        <td>{{$cuota->interesMoratorio}}</td>
                         <td>
-                        @if ($cuota['cancelado']==false)
+                        @if ($cuota->cancelado==false)
                         No
                         @else 
                         Sí

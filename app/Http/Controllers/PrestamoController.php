@@ -18,7 +18,9 @@ class PrestamoController extends Controller
      */
     public function index()
     {
-        $prestamos=prestamo::paginate(10);
+        //$prestamos=prestamo::paginate(10);
+        $prestamos= \DB::table('prestamos')->select('prestamos.*', 'cliente_garantes.clienteNombre')->join('cliente_garantes','prestamos.cliente_id','=','cliente_garantes.id')->get();
+        //dd($prestamos);
         return view('prestamos.index', compact('prestamos'));
     }
 
@@ -60,7 +62,8 @@ class PrestamoController extends Controller
         $prestamo->interesMoratorio=$request->interesMoratorio;
         $prestamo->fecha=$request->fecha;
         $prestamo->save();
-        $prestamo->clientes()->save($cliente);
+        //$prestamo->clientes()->save($cliente);
+        $cliente->prestamos()->associate($prestamo);
         $prestamo->save();  
         //creando cuota
         $cuotas=array();
@@ -133,6 +136,10 @@ class PrestamoController extends Controller
 
     public function mostrar(Request $request, $id){
         $prestamo=prestamo::find($id);
-        return view('prestamos.detalle', compact('prestamo'));
+        $prestamo->c=$prestamo->cuotas;
+        $cliente=clienteGarante::find($prestamo->cliente_id);
+        $det=json_encode(['cliente'=>$cliente,'prestamo'=>$prestamo]);
+        $detalle=json_decode($det);
+        return view('prestamos.detalle', compact('detalle'));
     }
 }

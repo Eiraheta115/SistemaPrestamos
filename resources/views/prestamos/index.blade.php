@@ -34,7 +34,7 @@
           <tr>
               <td>{{$prestamo->id}}</td>
               <td>{{$prestamo->fecha}}</td>
-              <td>{{$prestamo->clientes['clienteNombre']}}</td>
+              <td>{{$prestamo->clienteNombre}}</td>
               <td>{{$prestamo->monto}}</td>
               <td>{{$prestamo->saldo}}</td>
               <td>{{$prestamo->plazo}}</td>
@@ -59,7 +59,7 @@
         </table>
       </div>
       <br>
-      {{ $prestamos->links()}}
+      
     </div>
     <!-- /.card-body -->
   </div>

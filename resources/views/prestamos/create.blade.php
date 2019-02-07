@@ -1,7 +1,11 @@
 @extends('layouts.master')
 @section('content')
 <br>
-<!-- SELECT2 EXAMPLE -->
+@if (Session::has('Mensaje'))
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+<h5><i class="icon fa fa-check"></i> ¡Atencion!</h5>{{ Session::get('Mensaje') }}
+</div>
+@endif
 <form action="{{route('prestamos.store')}}" method="POST">
     @csrf
     <div class="card card-default">
