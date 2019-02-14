@@ -25,3 +25,4 @@ Route::resource('prestamos','PrestamoController');
 
 Route::get('/user/{id}', 'UserControl@show')->name('userShow');
 Route::get('/prestamos/{id}/cuotas','PrestamoController@mostrar')->name('prestamoDetalle');
+Route::post('/sendemail/{id}','UserControl@enviaremail')->name('mail');
