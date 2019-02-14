@@ -22,6 +22,7 @@ Route::resource('cuentas','CuentaController');
 Route::resource('categorias','CategoriaController');
 Route::resource('clientes','ClienteGaranteController');
 Route::resource('prestamos','PrestamoController');
+Route::resource('correlativos','CorrelativosController');
 
 Route::get('/user/{id}', 'UserControl@show')->name('userShow');
 Route::get('/prestamos/{id}/cuotas','PrestamoController@mostrar')->name('prestamoDetalle');
