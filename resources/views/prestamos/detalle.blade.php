@@ -30,6 +30,15 @@
                         <input type="text" name="clienteDui" id="clienteDui" class="form-control dui" value="{{$detalle->cliente->clienteDui}}" disabled>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label>NIT</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">NIT</span>
+                        </div>
+                        <input type="text" name="clienteNit" id="clienteNit" class="form-control nit" value="{{$detalle->cliente->clienteNit}}" disabled>
+                    </div>
+                </div>
                 <!-- /.form-group -->
                 <div class="form-group">
                     <div class="form-group">
