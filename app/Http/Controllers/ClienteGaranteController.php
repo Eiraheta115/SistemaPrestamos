@@ -38,17 +38,12 @@ class ClienteGaranteController extends Controller
     {   
         $request->validate([
             'clienteDui' => 'required',
+            'clienteNit' => 'required',
             'clienteNombre' => 'required',
             'clienteTelefono' => 'required',
             'clienteCelular' => 'required',
             'clienteEmail' => 'required',
-            'clienteDireccion' => 'required',
-            'garanteDui' => 'required',
-            'garanteNombre' => 'required',
-            'garanteTelefono' => 'required',
-            'garanteCelular' => 'required',
-            'garanteEmail' => 'required',
-            'garanteDireccion' => 'required'
+            'clienteDireccion' => 'required'
         ]);
         $clientes = clienteGarante::create($request->all());
         Session::flash('Mensaje', 'Cliente creada exitosamente');
@@ -88,17 +83,12 @@ class ClienteGaranteController extends Controller
     {
         $request->validate([
             'clienteDui' => 'required',
+            'clienteNit' => 'required',
             'clienteNombre' => 'required',
             'clienteTelefono' => 'required',
             'clienteCelular' => 'required',
             'clienteEmail' => 'required',
-            'clienteDireccion' => 'required',
-            'garanteDui' => 'required',
-            'garanteNombre' => 'required',
-            'garanteTelefono' => 'required',
-            'garanteCelular' => 'required',
-            'garanteEmail' => 'required',
-            'garanteDireccion' => 'required'
+            'clienteDireccion' => 'required'
         ]);
         $clienteGarante->update($request->all());
         Session::flash('Mensaje', 'Cliente editada exitosamente');

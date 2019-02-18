@@ -19,46 +19,28 @@
         <table id="example1" class="table table-bordered table-striped">
           <thead>
           <tr>
-            <th>ID</th>
+            <th>N°</th>
             <th>DUI</th>
+            <th>NIT</th>
             <th>Nombres</th>
-            <th>Email</th>
-            <th>Telefono</th>
-            <th>Celular</th>
-            <th>Garante</th>
-            <th>Garante Email</th>
-            <th>Garante Telefono</th>
-            <th>Garante Celular</th>
           </tr>
           </thead>
           <tbody id="myTable">
-          @foreach ($clientes as $clienteGarante)
+          @foreach ($clientes as $indexKey=>$clienteGarante)
           <tr>
-              <td>{{$clienteGarante->id}}</td>
+              <td>{{$indexKey+1}}</td>
               <td>{{$clienteGarante->clienteDui}}</td>
+              <td>{{$clienteGarante->clienteNit}}</td>
               <td>{{$clienteGarante->clienteNombre}}</td>
-              <td>{{$clienteGarante->clienteEmail}}</td>
-              <td>{{$clienteGarante->clienteTelefono}}</td>
-              <td>{{$clienteGarante->clienteCelular}}</td>
-              <td>{{$clienteGarante->garanteNombre}}</td>
-              <td>{{$clienteGarante->garanteEmail}}</td>
-              <td>{{$clienteGarante->garanteTelefono}}</td>
-              <td>{{$clienteGarante->garanteCelular}}</td>
           </tr>
           @endforeach
           </tbody>
           <tfoot>
           <tr>
-              <th>ID</th>
-              <th>DUI</th>
-              <th>Nombres</th>
-              <th>Email</th>
-              <th>Telefono</th>
-              <th>Celular</th>
-              <th>Garante</th>
-              <th>Garante Email</th>
-              <th>Garante Telefono</th>
-              <th>Garante Celular</th>
+            <th>N°</th>
+            <th>DUI</th>
+            <th>NIT</th>
+            <th>Nombres</th>
           </tr>
           </tfoot>
         </table>
