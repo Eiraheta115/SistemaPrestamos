@@ -16,17 +16,12 @@ class CreateClienteGarantesTable extends Migration
         Schema::create('cliente_garantes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('clienteDui');
+            $table->string('clienteNit');
             $table->string('clienteNombre');
             $table->string('clienteTelefono');
             $table->string('clienteCelular');    
             $table->string('clienteEmail');
             $table->string('clienteDireccion');
-            $table->string('garanteDui');
-            $table->string('garanteNombre');
-            $table->string('garanteTelefono');
-            $table->string('garanteCelular');    
-            $table->string('garanteEmail');
-            $table->string('garanteDireccion');
             $table->timestamps();
         });
     }
