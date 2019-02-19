@@ -109,6 +109,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('garantes.index') }}" class="nav-link">
+              <i class="nav-icon fa fa-users"></i>
+              <p>
+                Garantes
+              </p>
+            </a>
+          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link active">
               <i class="nav-icon fa fa-money-bill-alt"></i>
