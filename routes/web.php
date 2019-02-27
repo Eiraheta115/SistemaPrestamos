@@ -27,3 +27,5 @@ Route::resource('correlativos','CorrelativosController');
 Route::get('/user/{id}', 'UserControl@show')->name('userShow');
 Route::get('/prestamos/{id}/cuotas','PrestamoController@mostrar')->name('prestamoDetalle');
 Route::post('/sendemail/{id}','UserControl@enviaremail')->name('mail');
+Route::get('client/{id}/edit', 'ClienteGaranteController@edit')->name('editarCliente');
+//Route::post('client/{id}/update', 'ClienteGaranteController@actualizar')->name('actualizarCliente');

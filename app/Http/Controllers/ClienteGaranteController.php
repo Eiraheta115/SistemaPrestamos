@@ -67,8 +67,9 @@ class ClienteGaranteController extends Controller
      * @param  \App\clienteGarante  $clienteGarante
      * @return \Illuminate\Http\Response
      */
-    public function edit(clienteGarante $clienteGarante)
+    public function edit(clienteGarante $clienteGarante, $id)
     {
+        $clienteGarante = clienteGarante::find($id);
         return view('clientes.edit', compact('clienteGarante'));
     }
 
@@ -79,8 +80,9 @@ class ClienteGaranteController extends Controller
      * @param  \App\clienteGarante  $clienteGarante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, clienteGarante $clienteGarante)
+    public function update(Request $request, clienteGarante $clienteGarante, $id)
     {
+        $clienteGarante = clienteGarante::find($id);
         $request->validate([
             'clienteDui' => 'required',
             'clienteNit' => 'required',
@@ -92,6 +94,23 @@ class ClienteGaranteController extends Controller
         ]);
         $clienteGarante->update($request->all());
         Session::flash('Mensaje', 'Cliente editada exitosamente');
+        return redirect()->route('clientes.index');
+    }
+
+    public function actualizar(Request $request, $id)
+    {
+        $clienteGarante = clienteGarante::find($id);
+        $request->validate([
+            'clienteDui' => 'required',
+            'clienteNit' => 'required',
+            'clienteNombre' => 'required',
+            'clienteTelefono' => 'required',
+            'clienteCelular' => 'required',
+            'clienteEmail' => 'required',
+            'clienteDireccion' => 'required'
+        ]);
+        $clienteGarante->update($request->all());
+        Session::flash('Mensaje', 'Cliente editado exitosamente');
         return redirect()->route('clientes.index');
     }
 

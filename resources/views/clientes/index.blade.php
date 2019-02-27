@@ -3,6 +3,7 @@
 @section('content')
 <br>
 @if (Session::has('Mensaje'))
+<div class="alert alert-success alert-dismissible">
 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 <h5><i class="icon fa fa-check"></i> ¡Atencion!</h5>{{ Session::get('Mensaje') }}
 </div>
@@ -23,6 +24,7 @@
             <th>DUI</th>
             <th>NIT</th>
             <th>Nombres</th>
+            <th>Acciones</th>
           </tr>
           </thead>
           <tbody id="myTable">
@@ -32,6 +34,8 @@
               <td>{{$clienteGarante->clienteDui}}</td>
               <td>{{$clienteGarante->clienteNit}}</td>
               <td>{{$clienteGarante->clienteNombre}}</td>
+              <td><a class="btn btn-primary btn-flat mt-2" href="{{route('clientes.edit', $clienteGarante->id)}}"><i class="fas fa-edit"></i></a>
+              </td>
           </tr>
           @endforeach
           </tbody>
@@ -41,6 +45,7 @@
             <th>DUI</th>
             <th>NIT</th>
             <th>Nombres</th>
+            <th>Acciones</th>
           </tr>
           </tfoot>
         </table>

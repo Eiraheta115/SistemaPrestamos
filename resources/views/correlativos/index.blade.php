@@ -3,6 +3,7 @@
 @section('content')
 <br>
 @if (Session::has('Mensaje'))
+<div class="alert alert-success alert-dismissible">
 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 <h5><i class="icon fa fa-check"></i> ¡Atencion!</h5>{{ Session::get('Mensaje') }}
 </div>
@@ -40,8 +41,9 @@
                 <button type="submit" class="btn btn-primary btn-danger mt-2" onclick="return confirm('¿Esta seguro/a de inhabilitar el correlativo?')">
                   <i class="fas fa-ban"></i></button>
                 </form>
-          </tr>
-            </td>
+              </td>
+              </tr>
+           
           @endforeach
           </tbody>
           <tfoot>
