@@ -101,22 +101,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('clientes.index') }}" class="nav-link">
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
               <i class="nav-icon fa fa-users"></i>
               <p>
-                Clientes
+                Clientes y Garantes
+                <i class="right fa fa-caret-down"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('clientes.index') }}" class="nav-link active">
+                  <i class="fas fa-user-tie"></i>
+                  <p>
+                    Clientes
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a href="{{ route('garantes.index') }}" class="nav-link">
+                  <i class="fas fa-user-friends"></i>
+                  <p>
+                    Garantes
+                  </p>
+                </a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('garantes.index') }}" class="nav-link">
-              <i class="nav-icon fa fa-users"></i>
-              <p>
-                Garantes
-              </p>
-            </a>
-          </li>
+
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link active">
               <i class="nav-icon fa fa-money-bill-alt"></i>
@@ -140,24 +154,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="{{ route('categorias.index') }}" class="nav-link">
-              <i class="nav-icon fa fa-list-ol"></i>
-              <p>
-                Categorias
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('cuentas.index') }}" class="nav-link">
-              <i class="nav-icon fa fa-university "></i>
-              <p>
-                Cuentas
-              </p>
-            </a>
-          </li>
+
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-cog"></i>
               <p>
                 Configuración
@@ -166,9 +165,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('correlativos.index')}}" class="nav-link">
+                <a href="{{route('correlativos.index')}}" class="nav-link active">
                   <i class="fas fa-check"></i>
                   <p>Correlativos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('categorias.index') }}" class="nav-link">
+                  <i class="nav-icon fa fa-list-ol"></i>
+                  <p>
+                    Categorias
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('cuentas.index') }}" class="nav-link">
+                  <i class="nav-icon fa fa-university "></i>
+                  <p>
+                    Cuentas
+                  </p>
                 </a>
               </li>
             </ul>

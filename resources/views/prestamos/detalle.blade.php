@@ -111,7 +111,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body modal-lg">
                                     <!-- FORM CORREO-->
 
                                             <strong>Destinatario</strong>
@@ -129,9 +129,17 @@
                                                 <input type="text" name="tema" id="tema" class="form-control tema" placeholder="Ingrese el tema o asunto del correo">
                                             </div>
                                             <strong>Mensaje o cuerpo del correo</strong>
+                                            <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
                                             <div class="form-group">
-                                                <textarea class="form-control cuerpo" rows="3" name="cuerpo" name="cuerpo" placeholder="Ingrese el mensaje o cuerpo del correo"></textarea>
+                                                <textarea class="form-control cuerpo" rows="16" name="cuerpo" id="editor" placeholder="Ingrese el mensaje o cuerpo del correo"></textarea>
                                             </div>
+                                            <script>
+                                                ClassicEditor
+                                                    .create( document.querySelector( '#editor' ) )
+                                                    .catch( error => {
+                                                        console.error( error );
+                                                    } );
+                                            </script>
                                             <button type="submit" class="btn btn-block btn-success">Enviar</button>
                                         
                                 </div>

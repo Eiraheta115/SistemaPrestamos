@@ -70,9 +70,10 @@ class GaranteController extends Controller
      * @param  \App\garante  $garante
      * @return \Illuminate\Http\Response
      */
-    public function edit(garante $garante)
+    public function edit(Request $request, $id)
     {
-        //
+        $garante=garante::find($id);
+        return view('garantes.edit', compact('garante'));
     }
 
     /**
@@ -82,9 +83,29 @@ class GaranteController extends Controller
      * @param  \App\garante  $garante
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, garante $garante)
+    public function update(Request $request, $id)
     {
-        //
+        $garante=garante::find($id);
+        $request->validate([
+            'nombre'=>'required',
+            'dui'=>'required',
+            'nit'=>'required',
+            'telefono'=>'required',
+            'celular'=>'required',
+            'email'=>'required',
+            'direccion'=>'required'
+            ]); 
+            //dd($request->nombre);  
+            $garante->nombre=$request->nombre;
+            $garante->dui=$request->dui;
+            $garante->nit=$request->nit;
+            $garante->telefono=$request->telefono;
+            $garante->celular=$request->celular;
+            $garante->email=$request->email;
+            $garante->direccion=$request->direccion;
+            $garante->save();
+            Session::flash('Mensaje', 'Garante editado exitosamente');
+           return redirect()->route('garantes.index');
     }
 
     /**
