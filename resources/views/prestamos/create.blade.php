@@ -10,7 +10,7 @@
     @csrf
     <div class="card card-default">
         <div class="card-header">
-            <h3 class="card-title">Cliente</h3>
+            <h3 class="card-title">Cliente y Garante</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
             </div>
@@ -20,10 +20,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>DUI</label>
+                        <label>DUI cliente</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">DUI</span>
+                                <span class="input-group-text">DUI </span>
                             </div>
                             <input type="text" name="clienteDui" id="clienteDui" class="form-control dui" placeholder="Haga clic aqui para elegir al cliente"
                                 data-toggle="modal" data-target="#clientes-modal" readonly>
@@ -49,7 +49,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($clientes as $clienteGarante)
+                                                        @foreach ($clientesGarantes->clientes as $clienteGarante)
                                                         <tr>
                                                             <td>{{$clienteGarante->id}}</td>
                                                             <td>{{$clienteGarante->clienteDui}}</td>
@@ -70,7 +70,7 @@
                                                 </table>
                                             </div>
                                             <br>
-                                            {{ $clientes->links()}}
+                                            
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -83,7 +83,7 @@
                     <!-- /.form-group -->
                     <div class="form-group">
                         <div class="form-group">
-                            <label>Nombre</label>
+                            <label>Nombre cliente</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Nombre</span>
@@ -93,14 +93,9 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.form-group -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-6">
-                    <!-- /.form-group -->
                     <div class="form-group">
                         <div class="form-group">
-                            <label>Telefono</label>
+                            <label>Telefono cliente</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Telefono</span>
@@ -113,7 +108,7 @@
                     <!-- /.form-group -->
                     <div class="form-group">
                         <div class="form-group">
-                            <label>Celular</label>
+                            <label>Celular cliente</label>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Celular</span>
@@ -123,14 +118,120 @@
                             </div>
                         </div>
                     </div>
+                    <!-- /.form-group -->
                 </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                            <label>DUI garante</label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">DUI </span>
+                                </div>
+                                <input type="text" name="clienteDuiG" id="clienteDuiG" class="form-control dui" placeholder="Haga clic aqui para elegir al garante"
+                                    data-toggle="modal" data-target="#garantes-modal" readonly>
+                                <div class="modal fade" id="garantes-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Seleccione un garante</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="table-responsive">
+                                                    <table id="garantes" class="table table-bordered table-striped table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>DUI</th>
+                                                                <th>Nombres</th>
+                                                                <th>Seleccionado</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($clientesGarantes->garantes as $garante)
+                                                            <tr>
+                                                                <td>{{$garante->id}}</td>
+                                                                <td>{{$garante->dui}}</td>
+                                                                <td>{{$garante->nombre}}</td>
+                                                                <td><a class="btn btn-primary btn-lg ml-4" onClick="autoFillGarante('{{$garante->dui}}','{{$garante->nombre}}','{{$garante->telefono}}','{{$garante->celular}}'); return true;">Elegir</a>
+                                                            </tr>
+        
+                                                            @endforeach
+                                                        </tbody>
+                                                        <tfoot>
+                                                            <tr>
+                                                                <th>ID</th>
+                                                                <th>DUI</th>
+                                                                <th>Nombres</th>
+                                                                <th>Seleccionado</th>
+                                                            </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+                                                <br>
+                                                
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Nombre garante</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Nombre</span>
+                                    </div>
+                                    <input type="text" name="clienteNombreG" id="clienteNombreG" class="form-control nombre"
+                                        disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Telefono garante</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Telefono</span>
+                                    </div>
+                                    <input type="text" name="clienteTelefonoG" id="clienteTelefonoG" class="form-control telefono"
+                                        disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Celular garante</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Celular</span>
+                                    </div>
+                                    <input type="text" name="clienteCelularG" id="clienteCelularG" class="form-control celular"
+                                        disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+                <!-- /.col -->
+
                 <!-- /.col -->
             </div>
             <!-- /.row -->
         </div>
         <!-- /.card-body -->
         <div class="card-footer"></div>
-        <p class="ml-3">Esta area es para seleccionar al cliente que solicita el prestamo</p>
+        <p class="ml-3">Esta area es para seleccionar al cliente y garante para la creación del prestamo</p>
     </div>
 
     <div class="card card-default">
@@ -257,6 +358,15 @@
         document.getElementById('clienteNombre').value = nombre;
         document.getElementById('clienteTelefono').value = telefono;
         document.getElementById('clienteCelular').value = celular;
+    }
+
+</script>
+<script type="text/javascript">
+    function autoFillGarante(dui, nombre, telefono, celular) {
+        document.getElementById('clienteDuiG').value = dui;
+        document.getElementById('clienteNombreG').value = nombre;
+        document.getElementById('clienteTelefonoG').value = telefono;
+        document.getElementById('clienteCelularG').value = celular;
     }
 
 </script>

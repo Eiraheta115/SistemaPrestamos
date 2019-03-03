@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\prestamo;
 use App\clienteGarante;
 use App\cuota;
+use App\garante;
 use Illuminate\Http\Request;
 use Session;
 use DateTime;
@@ -31,8 +32,12 @@ class PrestamoController extends Controller
      */
     public function create()
     {
-        $clientes = clienteGarante::paginate(10);
-        return view('prestamos.create', compact('clientes'));
+        $clientes = clienteGarante::all();
+        $garantes = garante::all();
+        $cg=json_encode(['clientes'=>$clientes,'garantes'=>$garantes]);
+        $clientesGarantes=json_decode($cg);
+        //dd($clientesGarantes);
+        return view('prestamos.create', compact('clientesGarantes'));
     }
 
     /**
