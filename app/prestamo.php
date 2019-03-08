@@ -10,6 +10,10 @@ class prestamo extends Model
         return $this->hasOne('App\clienteGarante', 'id');
     }
 
+    public function garantes(){
+        return $this->hasOne('App\garante', 'id');
+    }
+
     public function cuotas(){
         return $this->hasMany('App\cuota', 'prestamo_id');
     }

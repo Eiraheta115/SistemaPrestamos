@@ -50,6 +50,7 @@ class PrestamoController extends Controller
     {
         $request->validate([
             'clienteDui' => 'required',
+            'clienteDuiG' => 'required',
             'monto' => 'required',
             'plazo' => 'required',
             'interes' => 'required',
@@ -58,6 +59,8 @@ class PrestamoController extends Controller
         ]);
 
         $cliente= clienteGarante::where('clienteDui',$request->clienteDui)->first();
+        $garante= garante::where('dui',$request->clienteDuiG)->first();
+        //dd($garante);
         $prestamo = new prestamo;
         $prestamo->cliente_id=$cliente->id;
         $prestamo->monto=$request->monto;
@@ -69,7 +72,9 @@ class PrestamoController extends Controller
         $prestamo->save();
         //$prestamo->clientes()->save($cliente);
         $cliente->prestamos()->associate($prestamo);
-        $prestamo->save();  
+        $prestamo->save();
+        $prestamo->garante_id=$garante->id;
+        $prestamo->save(); 
         //creando cuota
         $cuotas=array();
         $fee=round($request->monto/$request->plazo, 2);
@@ -143,7 +148,8 @@ class PrestamoController extends Controller
         $prestamo=prestamo::find($id);
         $prestamo->c=$prestamo->cuotas;
         $cliente=clienteGarante::find($prestamo->cliente_id);
-        $det=json_encode(['cliente'=>$cliente,'prestamo'=>$prestamo]);
+        $garante=garante::find($prestamo->garante_id);
+        $det=json_encode(['cliente'=>$cliente,'garante'=>$garante, 'prestamo'=>$prestamo]);
         $detalle=json_decode($det);
         return view('prestamos.detalle', compact('detalle'));
     }

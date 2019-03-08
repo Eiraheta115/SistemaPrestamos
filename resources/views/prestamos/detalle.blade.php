@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>DUI</label>
+                    <label>DUI cliente</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">DUI</span>
@@ -31,19 +31,10 @@
                         <input type="text" name="clienteDui" id="clienteDui" class="form-control dui" value="{{$detalle->cliente->clienteDui}}" disabled>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>NIT</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">NIT</span>
-                        </div>
-                        <input type="text" name="clienteNit" id="clienteNit" class="form-control nit" value="{{$detalle->cliente->clienteNit}}" disabled>
-                    </div>
-                </div>
                 <!-- /.form-group -->
                 <div class="form-group">
                     <div class="form-group">
-                        <label>Nombre</label>
+                        <label>Nombre cliente</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Nombre</span>
@@ -54,46 +45,7 @@
                 </div>
                 <div class="form-group">
                     <div class="form-group">
-                        <label>Telefono</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Telefono</span>
-                            </div>
-                            <input type="text" name="clienteTelefono" id="clienteTelefono" class="form-control telefono" value="{{$detalle->cliente->clienteTelefono}}" disabled>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.form-group -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-6">
-                <!-- /.form-group -->
-                <div class="form-group">
-                    <div class="form-group">
-                        <label>Monto de prestamo</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Monto</span>
-                            </div>
-                        <input type="text" name="prestamoMonto" id="prestamoMonto" class="form-control prestamoMonto" value="{{$detalle->prestamo->monto}}" disabled>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.form-group -->
-                <div class="form-group">
-                    <div class="form-group">
-                        <label>Saldo de prestamo</label>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">saldo</span>
-                            </div>
-                        <input type="text" name="prestamoSaldo" id="prestamoSaldo" class="form-control prestamoSaldo" value="{{$detalle->prestamo->saldo}}" disabled>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-group">
-                        <label>Correo del cliente</label>
+                        <label>Correo cliente</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" data-toggle="modal" data-target="#email-modal">email @ / enviar correo</span>
@@ -152,6 +104,120 @@
                         </div>
                     </div>
                 </div>
+                <!-- /.form-group -->
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>DUI garante</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">DUI</span>
+                        </div>
+                        <input type="text" name="clienteDui" id="clienteDui" class="form-control dui" value="{{$detalle->garante->dui}}" disabled>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Nombre garante</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Nombre</span>
+                            </div>
+                            <input type="text" name="clienteNombre" id="clienteNombre" class="form-control nombre" value="{{$detalle->garante->nombre}}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Correo garante</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" data-toggle="modal" data-target="#email-modal-garante">email @ / enviar correo</span>
+                            </div>
+                        <input type="text" name="clienteEmail" id="clienteEmail" class="form-control clienteEmail" value="{{$detalle->garante->email}}" 
+                        data-toggle="modal" data-target="#email-modal-garante" readonly>
+
+                        <div class="modal fade" id="email-modal-garante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Escriba el email al garante</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body modal-lg">
+                                    <!-- FORM CORREO-->
+
+                                            <strong>Destinatario</strong>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Para</span>
+                                                </div>
+                                                <input type="text" name="para" id="para" class="form-control para" value="{{$detalle->garante->email}}" readonly>
+                                            </div>
+                                            <strong>Tema o asunto</strong>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Asunto</span>
+                                                </div>
+                                                <input type="text" name="tema" id="tema" class="form-control tema" placeholder="Ingrese el tema o asunto del correo">
+                                            </div>
+                                            <strong>Mensaje o cuerpo del correo</strong>
+                                            <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+                                            <div class="form-group">
+                                                <textarea class="form-control cuerpo" rows="16" name="cuerpo" id="editor2" placeholder="Ingrese el mensaje o cuerpo del correo"></textarea>
+                                            </div>
+                                            <script>
+                                                ClassicEditor
+                                                    .create( document.querySelector( '#editor2' ) )
+                                                    .catch( error => {
+                                                        console.error( error );
+                                                    } );
+                                            </script>
+                                            <button type="submit" class="btn btn-block btn-success">Enviar</button>
+                                        
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6 offset-sm-3 text-center">
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Monto de prestamo</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Monto</span>
+                            </div>
+                        <input type="text" name="prestamoMonto" id="prestamoMonto" class="form-control prestamoMonto" value="{{$detalle->prestamo->monto}}" disabled>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Saldo de prestamo</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">saldo</span>
+                            </div>
+                        <input type="text" name="prestamoSaldo" id="prestamoSaldo" class="form-control prestamoSaldo" value="{{$detalle->prestamo->saldo}}" disabled>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             <!-- /.col -->
         </div>

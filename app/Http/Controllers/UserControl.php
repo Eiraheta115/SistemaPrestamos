@@ -32,7 +32,7 @@ class UserControl extends Controller
             $message->to($para)->subject($tema);
         });
         
-        Session::flash('Mensaje', 'Correo enviado exitosamente');
+        Session::flash('Mensaje', 'Correo enviado exitosamente a '.$para);
        return redirect()->route('prestamoDetalle', $id);
     }
 }
