@@ -16,7 +16,17 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <div class="table-responsive">
+    <ul class="nav nav-tabs" id="categoriaTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="dinero-tab" data-toggle="tab" href="#dinero" role="tab" aria-controls="dinero" aria-selected="true">Dinero $$</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="tiempo-tab" data-toggle="tab" href="#tiempo" role="tab" aria-controls="tiempo" aria-selected="false">Tiempo 1, 2...</a>
+  </li>
+</ul>
+<div class="tab-content" id="categoriaContent">
+  <div class="tab-pane fade show active" id="dinero" role="tabpanel" aria-labelledby="home-tab">
+  <div class="table-responsive">
         <table id="example1" class="table table-bordered table-striped">
           <thead>
           <tr>
@@ -58,6 +68,9 @@
       </div>
       <br>
       {{ $categorias->links()}}
+  </div>
+  <div class="tab-pane fade" id="tiempo" role="tabpanel" aria-labelledby="profile-tab">...</div>
+</div>    
     </div>
     <!-- /.card-body -->
   </div>
