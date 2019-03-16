@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\categoria;
+use App\categoriaT;
 use Illuminate\Http\Request;
 use Session;
 class CategoriaController extends Controller
@@ -14,8 +15,13 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $categorias = categoria::where('activo', true)->paginate(10);
-        return view('categorias.index',compact('categorias'));
+        //$categorias = categoria::where('activo', true)->paginate(10);
+        //return view('categorias.index',compact('categorias'));
+        $categorias = categoria::where('activo', true)->get();
+        $categoriasT = categoriaT::where('activo', true)->get();
+        $json=json_encode(['categorias'=>$categorias,'categoriasT'=>$categoriasT]);
+        $categorias=json_decode($json);
+        return view('categorias.index', compact('categorias'));
     }
 
     /**
@@ -26,6 +32,11 @@ class CategoriaController extends Controller
     public function create()
     {
         return view('categorias.create');
+    }
+
+    public function createT()
+    {
+        return view('categoriasT.create');
     }
 
     /**
@@ -43,6 +54,24 @@ class CategoriaController extends Controller
         ]);
 
         $categoria = new categoria;
+        $categoria->nombre = $request->nombre;
+        $categoria->rangoInicial =$request->rangoInicial;
+        $categoria->rangoFinal =$request->rangoFinal;
+        $categoria->activo = true;
+        $categoria->save();
+
+        Session::flash('Mensaje', 'Categoria creada exitosamente');
+        return redirect()->route('categorias.index');
+    }
+    public function storeT(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required',
+            'rangoInicial' => 'required',
+            'rangoFinal' => 'required'
+        ]);
+
+        $categoria = new categoriaT;
         $categoria->nombre = $request->nombre;
         $categoria->rangoInicial =$request->rangoInicial;
         $categoria->rangoFinal =$request->rangoFinal;
@@ -75,6 +104,12 @@ class CategoriaController extends Controller
         return view('categorias.edit', compact('categoria'));
     }
 
+    public function editT(Request $request, $id)
+    {
+        $categoria=categoriaT::find($id);
+        return view('categoriasT.edit', compact('categoria'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -100,6 +135,24 @@ class CategoriaController extends Controller
         return redirect()->route('categorias.index');
     }
 
+    public function updateT(Request $request, $id)
+    {
+        $request->validate([
+            'nombre' => 'required',
+            'rangoInicial' => 'required',
+            'rangoFinal' => 'required'
+        ]);
+        $categoria=categoriaT::find($id);    
+        $categoria->nombre = $request->nombre;
+        $categoria->rangoInicial =$request->rangoInicial;
+        $categoria->rangoFinal =$request->rangoFinal;
+        $categoria->activo = true;
+        $categoria->save();
+
+        Session::flash('Mensaje', 'Categoria editada exitosamente');
+        return redirect()->route('categorias.index');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -108,6 +161,15 @@ class CategoriaController extends Controller
      */
     public function destroy(categoria $categoria)
     {
+        $categoria->activo=false;
+        $categoria->save();
+        Session::flash('Mensaje', 'Categoria deshabilitada exitosamente');
+        return redirect()->route('categorias.index');
+    }
+
+    public function destroyT(Request $request, $id)
+    {
+        $categoria=categoriaT::find($id);
         $categoria->activo=false;
         $categoria->save();
         Session::flash('Mensaje', 'Categoria deshabilitada exitosamente');

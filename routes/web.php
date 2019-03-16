@@ -29,3 +29,9 @@ Route::get('/prestamos/{id}/cuotas','PrestamoController@mostrar')->name('prestam
 Route::post('/sendemail/{id}','UserControl@enviaremail')->name('mail');
 Route::get('client/{id}/edit', 'ClienteGaranteController@edit')->name('editarCliente');
 //Route::post('client/{id}/update', 'ClienteGaranteController@actualizar')->name('actualizarCliente');
+//categoriaT
+Route::get('categoriasT/create','CategoriaController@createT')->name('createT');
+Route::post('categoriasT','CategoriaController@storeT')->name('storeT');
+Route::get('categoriasT/{id}/edit','CategoriaController@editT')->name('editT');
+Route::put('categoriasT/{id}/update','CategoriaController@updateT')->name('updateT');
+Route::delete('categoriasT/{id}/delete','CategoriaController@destroyT')->name('destroyT');
