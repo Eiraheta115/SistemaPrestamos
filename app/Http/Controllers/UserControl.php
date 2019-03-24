@@ -13,6 +13,38 @@ class UserControl extends Controller
         return view('user.show', compact('user'));
     }
 
+    public function update(Request $request, $id){
+        $user = User::find($id);
+        $request->validate([
+            'nombre' => 'required',
+            'correo' => 'required',
+        ]);
+        //$input = $request->only('nombre','correo');
+        //$user = User::find($id);
+        $user->name=$request->nombre;
+        $user->email=$request->correo;
+        $user->save();
+        Session::flash('Mensaje', 'Datos modificados exitosamente');
+        return view('user.show', compact('user'));
+    }
+
+    public function updatePass(Request $request, $id){
+        $user = User::find($id);
+        //dd($request);
+       /* $request->validate([
+            'pass' => 'required|min:6',
+            'npass' => 'required|min:6|same:pass'
+        ]);*/
+        if($request->pass==$request->npass){   
+            $user->password=bcrypt($request->pass);
+            $user->save();
+            Session::flash('Mensaje', 'Contraseña modificada exitosamente');
+            return view('user.show', compact('user'));
+        }
+        Session::flash('Error', 'Contraseñas no coinciden');
+        return view('user.show', compact('user'));
+    }
+
     public function enviaremail(Request $request, $id){
         //dd($request);
         $request->validate([

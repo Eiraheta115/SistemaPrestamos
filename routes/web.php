@@ -25,6 +25,8 @@ Route::resource('prestamos','PrestamoController');
 Route::resource('garantes', 'GaranteController');
 Route::resource('correlativos','CorrelativosController');
 Route::get('/user/{id}', 'UserControl@show')->name('userShow');
+Route::put('/user/{id}', 'UserControl@update')->name('userUpdate');
+Route::put('/user/{id}/pass', 'UserControl@updatePass')->name('userUpdatePass');
 Route::get('/prestamos/{id}/cuotas','PrestamoController@mostrar')->name('prestamoDetalle');
 Route::post('/sendemail/{id}','UserControl@enviaremail')->name('mail');
 Route::get('client/{id}/edit', 'ClienteGaranteController@edit')->name('editarCliente');
