@@ -2,8 +2,15 @@
 @section('content')
 <br>
 @if (Session::has('Mensaje'))
+<div class="alert alert-success alert-dismissible">
 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 <h5><i class="icon fa fa-check"></i> ¡Atencion!</h5>{{ Session::get('Mensaje') }}
+</div>
+@endif
+@if (Session::has('Error'))
+<div class="alert alert-danger alert-dismissible">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+<h5><i class="icon fa fa-alert"></i> ¡Atencion!</h5>{{ Session::get('Error') }}
 </div>
 @endif
 <form action="{{route('prestamos.store')}}" method="POST">
@@ -56,7 +63,7 @@
                                                             <td>{{$clienteGarante->clienteNombre}}</td>
                                                             <td><a class="btn btn-primary btn-lg ml-4" onClick="autoFill('{{$clienteGarante->clienteDui}}','{{$clienteGarante->clienteNombre}}','{{$clienteGarante->clienteTelefono}}','{{$clienteGarante->clienteCelular}}'); return true;">Elegir</a>
                                                         </tr>
-    
+
                                                         @endforeach
                                                     </tbody>
                                                     <tfoot>
@@ -70,7 +77,7 @@
                                                 </table>
                                             </div>
                                             <br>
-                                            
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -159,7 +166,7 @@
                                                                 <td>{{$garante->nombre}}</td>
                                                                 <td><a class="btn btn-primary btn-lg ml-4" onClick="autoFillGarante('{{$garante->dui}}','{{$garante->nombre}}','{{$garante->telefono}}','{{$garante->celular}}'); return true;">Elegir</a>
                                                             </tr>
-        
+
                                                             @endforeach
                                                         </tbody>
                                                         <tfoot>
@@ -173,7 +180,7 @@
                                                     </table>
                                                 </div>
                                                 <br>
-                                                
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -222,7 +229,7 @@
                             </div>
                         </div>
                     </div>
-                </div>    
+                </div>
                 <!-- /.col -->
 
                 <!-- /.col -->
@@ -245,6 +252,15 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
+                  <div class="form-group">
+                      <label>Codigo de prestamo</label>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text">0131</span>
+                          </div>
+                          <input type="text" value="{{$clientesGarantes->correlativo}}" name="codigo" id="codigo" class="form-control">
+                      </div>
+                  </div>
                     <div class="form-group">
                         <label>Monto</label>
                         <div class="input-group mb-3">
@@ -268,20 +284,21 @@
                         </div>
                     </div>
                     <!-- /.form-group -->
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label>Interes</label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">% i</span>
-                                </div>
-                                <input type="text" name="interes" id="interes" class="form-control" placeholder="Ingrese el porcentaje de interes mensual">
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
                 <!-- /.col -->
                 <div class="col-md-6">
+                  <div class="form-group">
+                      <div class="form-group">
+                          <label>Interes</label>
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                  <span class="input-group-text">% i</span>
+                              </div>
+                              <input type="text" name="interes" id="interes" class="form-control" placeholder="Ingrese el porcentaje de interes mensual">
+                          </div>
+                      </div>
+                  </div>
                     <div class="form-group">
                         <div class="form-group">
                             <label>Interes moratorio</label>
@@ -306,42 +323,44 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                      <div class="form-group">
-                          <label>Calcular</label>
-                          <div class="input-group mb-3">
-                            <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#pagos-modal" 
-                            onclick="calcularpagos(document.getElementById('fecha'),document.getElementById('interesMoratorio'),document.getElementById('interes'), document.getElementById('plazo'),document.getElementById('monto')); return true;">Calcular</button>
-                            <div class="modal fade" id="pagos-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Listado de cuotas</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="table-responsive">
-                                                <table id="pagos" class="table table-bordered table-striped table-hover">
-                                                </table>
-                                            </div>
-                                            <br>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                          </div>
-                      </div>
-                  </div>
+
                     <!-- /.form-group -->
                 </div>
+
                 <!-- /.col -->
             </div>
+            <div class="form-group">
+              <div class="form-group">
+                  <label>Calcular</label>
+                  <div class="input-group mb-3">
+                    <button type="button" class="btn btn-block btn-success" data-toggle="modal" data-target="#pagos-modal"
+                    onclick="calcularpagos(document.getElementById('fecha'),document.getElementById('interesMoratorio'),document.getElementById('interes'), document.getElementById('plazo'),document.getElementById('monto')); return true;">Calcular</button>
+                    <div class="modal fade" id="pagos-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Listado de cuotas</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table id="pagos" class="table table-bordered table-striped table-hover">
+                                        </table>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
             <!-- /.row -->
         </div>
         <!-- /.card-body -->

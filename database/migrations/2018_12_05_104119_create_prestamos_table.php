@@ -15,6 +15,7 @@ class CreatePrestamosTable extends Migration
     {
         Schema::create('prestamos', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('codigo');
             $table->integer('cliente_id')->unsigned();
             $table->integer('garante_id')->unsigned()->nullable();
             $table->decimal('monto',6,2);

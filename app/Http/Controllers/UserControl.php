@@ -30,19 +30,22 @@ class UserControl extends Controller
 
     public function updatePass(Request $request, $id){
         $user = User::find($id);
-        //dd($request);
-       /* $request->validate([
-            'pass' => 'required|min:6',
-            'npass' => 'required|min:6|same:pass'
-        ]);*/
-        if($request->pass==$request->npass){   
-            $user->password=bcrypt($request->pass);
-            $user->save();
-            Session::flash('Mensaje', 'Contraseña modificada exitosamente');
+        if(strlen($request->pass)>6 && strlen($request->npass)>6){
+            if($request->pass==$request->npass){   
+                $user->password=bcrypt($request->pass);
+                $user->save();
+                Session::flash('Mensaje', 'Contraseña modificada exitosamente');
+                return view('user.show', compact('user'));
+            }else {
+                Session::flash('Error', 'Contraseñas no coinciden');
+                return view('user.show', compact('user'));
+            }
+        }else{
+            Session::flash('Error', 'Se requiere 6 caracteres como minimo en la contraseña');
             return view('user.show', compact('user'));
         }
-        Session::flash('Error', 'Contraseñas no coinciden');
-        return view('user.show', compact('user'));
+        
+        
     }
 
     public function enviaremail(Request $request, $id){

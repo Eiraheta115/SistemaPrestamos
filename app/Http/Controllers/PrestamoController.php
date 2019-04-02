@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\prestamo;
+use App\correlativos;
 use App\clienteGarante;
 use App\cuota;
 use App\garante;
@@ -34,7 +35,8 @@ class PrestamoController extends Controller
     {
         $clientes = clienteGarante::all();
         $garantes = garante::all();
-        $cg=json_encode(['clientes'=>$clientes,'garantes'=>$garantes]);
+        $correlativo = self::getCorrelativo("Prestamos");
+        $cg=json_encode(['clientes'=>$clientes,'garantes'=>$garantes,'correlativo'=>$correlativo]);
         $clientesGarantes=json_decode($cg);
         //dd($clientesGarantes);
         return view('prestamos.create', compact('clientesGarantes'));
@@ -51,6 +53,7 @@ class PrestamoController extends Controller
         $request->validate([
             'clienteDui' => 'required',
             'clienteDuiG' => 'required',
+            'codigo'=>'required',
             'monto' => 'required',
             'plazo' => 'required',
             'interes' => 'required',
@@ -63,6 +66,7 @@ class PrestamoController extends Controller
         //dd($garante);
         $prestamo = new prestamo;
         $prestamo->cliente_id=$cliente->id;
+        $prestamo->codigo=$request->codigo;
         $prestamo->monto=$request->monto;
         $prestamo->saldo=$request->monto;
         $prestamo->plazo=$request->plazo;
@@ -74,7 +78,7 @@ class PrestamoController extends Controller
         $cliente->prestamos()->associate($prestamo);
         $prestamo->save();
         $prestamo->garante_id=$garante->id;
-        $prestamo->save(); 
+        $prestamo->save();
         //creando cuota
         $cuotas=array();
         $fee=round($request->monto/$request->plazo, 2);
@@ -90,7 +94,7 @@ class PrestamoController extends Controller
                 'interes'=>0.00,
                 'interesMoratorio'=>0.00,
                 'cancelado'=>false
-                
+
             ];
         }
         //dd($cuotas);
@@ -110,6 +114,34 @@ class PrestamoController extends Controller
         //
     }
 
+    public function getCorrelativo($TDoc)
+    {
+      if ($TDoc=="Prestamos"){
+        $correlativo=correlativos::where([
+          ['activo',"=", true],
+          ['TDoc', "=","Prestamos"],
+        ])->first();
+        if(empty($correlativo)){
+          Session::flash('Error', 'No existen correlativos, ingreso uno manual');
+          return view('user.show', compact('user'));
+        }else{
+
+          $prestamos=\DB::table('prestamos')->select('codigo')->where('codigo','LIKE',"{$correlativo->prefijo}%")->orderByRaw('LENGTH(codigo)')->orderByRaw('CAST (SUBSTRING("codigo",9) AS INTEGER)')->get();
+          $size=$prestamos->count()-1;
+          //dd($prestamos[$size]);
+          if(empty($prestamos[$size])){
+            $Ncorrelativo=$correlativo->prefijo.'1';
+            return $Ncorrelativo;
+          }else {
+            $Ncaracteres=strlen($correlativo->prefijo);
+            $Num=(int)substr($prestamos[$size]->codigo,$Ncaracteres);
+            $NextNum=$Num+1;
+            return $correlativo->prefijo.strval($NextNum);
+          }
+        }
+
+      }
+    }
     /**
      * Show the form for editing the specified resource.
      *
