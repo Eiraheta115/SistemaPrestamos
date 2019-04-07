@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use Mail;
 use Session;
@@ -31,7 +32,7 @@ class UserControl extends Controller
     public function updatePass(Request $request, $id){
         $user = User::find($id);
         if(strlen($request->pass)>6 && strlen($request->npass)>6){
-            if($request->pass==$request->npass){   
+            if($request->pass==$request->npass){
                 $user->password=bcrypt($request->pass);
                 $user->save();
                 Session::flash('Mensaje', 'Contraseña modificada exitosamente');
@@ -44,8 +45,8 @@ class UserControl extends Controller
             Session::flash('Error', 'Se requiere 6 caracteres como minimo en la contraseña');
             return view('user.show', compact('user'));
         }
-        
-        
+
+
     }
 
     public function enviaremail(Request $request, $id){
@@ -61,13 +62,18 @@ class UserControl extends Controller
         $data = array(
             'cuerpo' => $request->cuerpo
         );
-        
+
         Mail::send('email.mail', $data, function($message) use($para, $tema){
             $message->from('ceiraheta87@gmail.com', 'MPJ Prestamos');
             $message->to($para)->subject($tema);
         });
-        
+
         Session::flash('Mensaje', 'Correo enviado exitosamente a '.$para);
        return redirect()->route('prestamoDetalle', $id);
+    }
+
+    public function cerrarSesion(){
+      Auth::logout();
+      return redirect('/');
     }
 }

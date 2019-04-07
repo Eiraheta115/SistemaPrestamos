@@ -50,7 +50,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" data-toggle="modal" data-target="#email-modal">email @ / enviar correo</span>
                             </div>
-                        <input type="text" name="clienteEmail" id="clienteEmail" class="form-control clienteEmail" value="{{$detalle->cliente->clienteEmail}}" 
+                        <input type="text" name="clienteEmail" id="clienteEmail" class="form-control clienteEmail" value="{{$detalle->cliente->clienteEmail}}"
                         data-toggle="modal" data-target="#email-modal" readonly>
 
                         <div class="modal fade" id="email-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -93,7 +93,7 @@
                                                     } );
                                             </script>
                                             <button type="submit" class="btn btn-block btn-success">Enviar</button>
-                                        
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -135,7 +135,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" data-toggle="modal" data-target="#email-modal-garante">email @ / enviar correo</span>
                             </div>
-                        <input type="text" name="clienteEmail" id="clienteEmail" class="form-control clienteEmail" value="{{$detalle->garante->email}}" 
+                        <input type="text" name="clienteEmail" id="clienteEmail" class="form-control clienteEmail" value="{{$detalle->garante->email}}"
                         data-toggle="modal" data-target="#email-modal-garante" readonly>
 
                         <div class="modal fade" id="email-modal-garante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -178,7 +178,7 @@
                                                     } );
                                             </script>
                                             <button type="submit" class="btn btn-block btn-success">Enviar</button>
-                                        
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -192,8 +192,21 @@
                 <!-- /.form-group -->
             </div>
             <!-- /.col -->
+
             <div class="col-md-6 offset-sm-3 text-center">
                 <!-- /.form-group -->
+                <hr>
+                <div class="form-group">
+                    <div class="form-group">
+                        <label>Codigo de prestamo</label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Codigo</span>
+                            </div>
+                        <input type="text" name="codigo" id="codigo" class="form-control codigo" value="{{$detalle->prestamo->codigo}}" disabled>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <div class="form-group">
                         <label>Monto de prestamo</label>
@@ -217,7 +230,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
             <!-- /.col -->
         </div>
@@ -237,7 +250,7 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        
+
             <div class="card-body">
                 <div class="table-responsive">
                   <table id="example1" class="table table-bordered table-striped">
@@ -254,7 +267,7 @@
                     </thead>
                     <tbody id="myTable">
                     @foreach ($detalle->prestamo->c as $indexKey =>$cuota)
-                   
+
                     <tr>
                         <td>{{$indexKey+1}}</td>
                         <td>{{$cuota->fechaPago}}</td>
@@ -265,11 +278,11 @@
                         <td>
                         @if ($cuota->cancelado==false)
                         No
-                        @else 
+                        @else
                         Sí
                         @endif
-                        </td>  
-          
+                        </td>
+
                     </tr>
                     @endforeach
                     </tbody>

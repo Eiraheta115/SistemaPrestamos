@@ -122,7 +122,7 @@ class PrestamoController extends Controller
           ['TDoc', "=","Prestamos"],
         ])->first();
         if(empty($correlativo)){
-          Session::flash('Error', 'No existen correlativos, ingreso uno manual');
+          Session::flash('Error', 'No existen correlativos, ingreso un codigo manual');
           return view('user.show', compact('user'));
         }else{
 

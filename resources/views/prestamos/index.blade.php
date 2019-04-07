@@ -10,9 +10,9 @@
 @endif
 <div class="card">
     <div class="card-header">
-    
+
       <h3 class="card-title mt-3">Lista de prestamos</h3>
-      
+
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -21,6 +21,7 @@
           <thead>
           <tr>
             <th>N°</th>
+            <th>Código</th>
             <th>Fecha</th>
             <th>Solicitante</th>
             <th>Monto prestamo</th>
@@ -34,6 +35,7 @@
           @foreach ($prestamos as $prestamo)
           <tr>
               <td>{{$prestamo->id}}</td>
+              <td>{{$prestamo->codigo}}</td>
               <td>{{$prestamo->fecha}}</td>
               <td>{{$prestamo->clienteNombre}}</td>
               <td>{{$prestamo->monto}}</td>
@@ -48,6 +50,7 @@
           <tfoot>
           <tr>
               <th>N°</th>
+              <th>Código</th>
               <th>Fecha</th>
               <th>Solicitante</th>
               <th>Monto prestamo</th>
@@ -60,9 +63,9 @@
         </table>
       </div>
       <br>
-      
+
     </div>
     <!-- /.card-body -->
   </div>
-  <!-- /.card -->  
-  @endsection  
+  <!-- /.card -->
+  @endsection

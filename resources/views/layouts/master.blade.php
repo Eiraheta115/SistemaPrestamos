@@ -189,15 +189,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </ul>
           </li>
           <li class="nav-item">
-            <a href="{{ route('logout') }}" class="nav-link"
-            onclick="event.preventDefault();
-            document.getElementById('logout-form').submit();">
-              <i class="nav-icon fa fa-sign-out-alt "></i>
-              {{ __('Logout') }}
+            <a href="{{ route('cerrarSesion') }}" class="nav-link">
+              <i class="fas fa-sign-out-alt"></i>
+              <p>
+                Cerrar sesion
+              </p>
             </a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-              @csrf
-            </form> 
           </li>
         </ul>
       </nav>
@@ -237,7 +234,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="/path/to/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 </html>
-<script type="text/javascript">        
+<script type="text/javascript">
   (function($){
       $(function(){
           // REMOVE THIS LINE once its working
@@ -253,10 +250,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   }
                   // Unhighlight any previous keywords
                   if (currentKeyword) {
-                      $container.unhighlight({className: "highlight"});                            
+                      $container.unhighlight({className: "highlight"});
                   }
                   currentKeyword = findText;
-                  $container.highlight(findText, {className: classNames});                        
+                  $container.highlight(findText, {className: classNames});
                   return this;
               };
           $("#userFindInputText").on("keyup", function(ev){
