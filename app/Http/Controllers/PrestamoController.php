@@ -7,6 +7,7 @@ use App\correlativos;
 use App\clienteGarante;
 use App\cuota;
 use App\garante;
+use App\pago;
 use Illuminate\Http\Request;
 use Session;
 use DateTime;
@@ -84,18 +85,22 @@ class PrestamoController extends Controller
         $fee=round($request->monto/$request->plazo, 2);
         $plazos=$request->plazo;
         $nextDate = $request->fecha;
+        $saldoInicial=$request->monto;
         for ($p=0; $p<$plazos; $p++){
             $nextDate =date('Y-m-d', strtotime($nextDate. ' + 30 days'));
             $cuotas[]=[
+                'correlativo' => $p+1,
                 'prestamo_id'=>$prestamo->id,
                 'fechaPago' =>$nextDate,
+                'saldoInicial' => $saldoInicial,
                 'monto'=> $fee,
                 'saldoCuota'=>$fee,
-                'interes'=>0.00,
+                'interes'=>round(($request->interes/100)*$saldoInicial,2),
                 'interesMoratorio'=>0.00,
                 'cancelado'=>false
 
             ];
+            $saldoInicial=$saldoInicial-$fee;
         }
         //dd($cuotas);
         $prestamo->cuotas()->createMany($cuotas);
@@ -126,7 +131,7 @@ class PrestamoController extends Controller
           return view('user.show', compact('user'));
         }else{
 
-          $prestamos=\DB::table('prestamos')->select('codigo')->where('codigo','LIKE',"{$correlativo->prefijo}%")->orderByRaw('LENGTH(codigo)')->orderByRaw('CAST (SUBSTRING("codigo",9) AS INTEGER)')->get();
+          $prestamos=\DB::table('prestamos')->select('codigo')->where('codigo','LIKE',"{$correlativo->prefijo}%")->orderByRaw('LENGTH(codigo)')->orderByRaw('CAST (SUBSTRING("codigo",10) AS INTEGER)')->get();
           $size=$prestamos->count()-1;
           //dd($prestamos[$size]);
           if(empty($prestamos[$size])){
@@ -177,11 +182,17 @@ class PrestamoController extends Controller
     }
 
     public function mostrar(Request $request, $id){
+        $correlativo=correlativos::where([
+          ['activo',"=", true],
+          ['TDoc', "=","Prestamos"],
+        ])->first();
+
         $prestamo=prestamo::find($id);
         $prestamo->c=$prestamo->cuotas;
+        $pagos=pago::where('prestamo_id', $prestamo->id)->get();
         $cliente=clienteGarante::find($prestamo->cliente_id);
         $garante=garante::find($prestamo->garante_id);
-        $det=json_encode(['cliente'=>$cliente,'garante'=>$garante, 'prestamo'=>$prestamo]);
+        $det=json_encode(['cliente'=>$cliente,'garante'=>$garante, 'prestamo'=>$prestamo, 'pagos'=>$pagos]);
         $detalle=json_decode($det);
         return view('prestamos.detalle', compact('detalle'));
     }

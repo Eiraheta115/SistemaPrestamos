@@ -24,6 +24,7 @@ class CreatePrestamosTable extends Migration
             $table->decimal('interes',6,2);
             $table->decimal('interesMoratorio',6,2);
             $table->date('fecha');
+            $table->json('saldos')->nullable();
             $table->timestamps();
         });
     }

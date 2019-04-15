@@ -39,4 +39,7 @@ Route::group(['middleware'=>['revalidate','auth']], function(){
   Route::put('categoriasT/{id}/update','CategoriaController@updateT')->name('updateT');
   Route::delete('categoriasT/{id}/delete','CategoriaController@destroyT')->name('destroyT');
   Route::get('cuenta/cerrarSesion', 'UserControl@cerrarSesion')->name('cerrarSesion');
+  //pagos
+  Route::get('prestamos/{id}/pagos','PagoController@createPago')->name('createPago');
+  Route::post('prestamos/{id}/pagos/guardar','PagoController@guardarPago')->name('guardarPago');
 });

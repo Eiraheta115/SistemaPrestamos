@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
 
 <br>
@@ -9,11 +8,18 @@
 <h5><i class="icon fa fa-check"></i> ¡Atencion!</h5>{{ Session::get('Mensaje') }}
 </div>
 @endif
+@if (Session::has('Error'))
+<div class="alert alert-danger alert-dismissible">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+<h5><i class="icon fa fa-alert"></i> ¡Atencion!</h5>{{ Session::get('Error') }}
+</div>
+@endif
+
 <form action="{{route('mail', $detalle->prestamo->id)}}" method="POST">
         @csrf
 <div class="card card-default">
     <div class="card-header">
-        <h3 class="card-title">Detalle de prestamo</h3>
+        <h3 class="card-title">Detalle de pago</h3>
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
         </div>
@@ -192,7 +198,7 @@
                 <!-- /.form-group -->
             </div>
             <!-- /.col -->
-
+</form>
             <div class="col-md-6 offset-sm-3 text-center">
                 <!-- /.form-group -->
                 <hr>
@@ -214,23 +220,21 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Monto</span>
                             </div>
-                        <input type="text" name="prestamoMonto" id="prestamoMonto" class="form-control prestamoMonto" value="{{$detalle->prestamo->monto}}" disabled>
+                        <input type="text" name="prestamoMonto" id="prestamoMonto" class="form-control prestamoMonto" value="{{'$ ' . $detalle->prestamo->monto}}" disabled>
                         </div>
                     </div>
                 </div>
-                <!-- /.form-group -->
                 <div class="form-group">
                     <div class="form-group">
-                        <label>Saldo de prestamo</label>
+                        <label>Cuota de prestamo</label>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">saldo</span>
+                                <span class="input-group-text">Monto</span>
                             </div>
-                        <input type="text" name="prestamoSaldo" id="prestamoSaldo" class="form-control prestamoSaldo" value="{{$detalle->prestamo->saldo}}" disabled>
+                        <input type="text" name="cuotaMonto" id="cuotaMonto" class="form-control cuotaMonto" value="{{'$ ' . $detalle->cuota->monto}}" disabled>
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- /.col -->
         </div>
@@ -240,7 +244,8 @@
     <div class="card-footer"></div>
     <p class="ml-3">Área de detalle de prestamo</p>
 </div>
-
+<form action="{{route('guardarPago', $detalle->prestamo->id)}}" method="POST">
+    @csrf
 <div class="card card-default">
     <div class="card-header">
         <h3 class="card-title">Detalle de cuotas y pagos</h3>
@@ -249,119 +254,170 @@
         </div>
     </div>
     <!-- /.card-header -->
+
     <div class="card-body">
-      <ul class="nav nav-pills mb-3" id="cuotasTab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" id="cuota-tab" data-toggle="tab" href="#cuota" role="tab" aria-controls="cuota" aria-selected="true">Cuotas $$</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="pago-tab" data-toggle="tab" href="#pago" role="tab" aria-controls="pago" aria-selected="false">Pagos $$</a>
-    </li>
-  </ul>
-  <div class="tab-content" id="cuotaspagosContent">
-    <div class="tab-pane fade show active" id="cuota" role="tabpanel" aria-labelledby="home-tab">
-      <div class="card-body">
-          <div class="table-responsive">
-            <table id="example1" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>N°</th>
-                <th>Fecha de pago</th>
-                <th>Monto</th>
-                <th>Saldo prestamo</th>
-                <th>Interes</th>
-                <th>Interes Moratorio</th>
-                <th>cancelado</th>
-              </tr>
-              </thead>
-              <tbody id="myTable">
-              @foreach ($detalle->prestamo->c as $indexKey =>$cuota)
+      <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+                <label>Numero de cuota</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">1, 2, 3..</span>
+                    </div>
+                    <input type="text" name="correlativo" id="correlativo" class="form-control" value="{{$detalle->cuota->correlativo}}" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Monto a recibir</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$0.01</span>
+                    </div>
+                    <input type="number" step="0.01" min="0.00" name="monto" id="monto" class="form-control"
+                        placeholder="Ingrese el monto a recibir">
+                </div>
+            </div>
+              <div class="form-group">
+                  <label>Abono a capital</label>
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">$0.01</span>
+                      </div>
+                      <input type="number" step="0.01" min="0.00" name="abono" id="abono" class="form-control"
+                          placeholder="Ingrese el monto para abonar">
+                  </div>
+              </div>
+              <!-- /.form-group -->
 
-              <tr>
-                  <td>{{$indexKey+1}}</td>
-                  <td>{{$cuota->fechaPago}}</td>
-                  <td>{{'$ ' . $cuota->monto}}</td>
-                  <td>{{'$ ' . $cuota->saldoCuota}}</td>
-                  <td>{{$cuota->interes . ' %'}}</td>
-                  <td>{{$cuota->interesMoratorio . ' %'}}</td>
-                  <td>
-                  @if ($cuota->cancelado==false)
-                  No
-                  @else
-                  Sí
-                  @endif
-                  </td>
+              <!-- /.form-group -->
 
-              </tr>
-              @endforeach
-              </tbody>
-              <tfoot>
-              <tr>
-                  <th>N°</th>
-                  <th>Fecha de pago</th>
-                  <th>Monto</th>
-                  <th>Saldo prestamo</th>
-                  <th>Interes</th>
-                  <th>Interes Moratorio</th>
-                  <th>cancelado</th>
-              </tr>
-              </tfoot>
-            </table>
           </div>
-          <br>
-        </div>
-    </div>
-    <div class="tab-pane fade show active" id="pago" role="tabpanel" aria-labelledby="home-tab">
-      <div class="card-body">
-          <div class="table-responsive">
-            <table id="example1" class="table table-bordered table-striped">
-              <thead>
-              <tr>
-                <th>N°</th>
-                <th>Codigo</th>
-                <th>Saldo inicial</th>
-                <th>Saldo final</th>
-                <th>Mora</th>
-                <th>Mora acumulada</th>
-              </tr>
-              </thead>
-              <tbody id="myTable">
-              @foreach ($detalle->pagos as $indexKey =>$pago)
+          <div class="col-md-6">
+            <div class="form-group">
+                <div class="form-group">
+                    <label>Pago adicional</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">1,2..</span>
+                        </div>
+                        <input type="number" step="0.01" min="0.00" name="pagoadd" id="pagoadd" class="form-control"
+                            placeholder="Ingrese el monto de pago adicional">
+                      </div>
+                </div>
+            </div>
+              <div class="form-group">
+                  <label>Pago de interes</label>
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text">$0.01</span>
+                      </div>
+                      <input type="number" step="0.01" min="0.00" name="interes" id="interes" class="form-control"
+                          placeholder="Ingrese el monto para abonar">
+                  </div>
+              </div>
+              <!-- /.form-group -->
+              <div class="form-group">
+                  <div class="form-group">
+                      <label>Pago de interes moratorio</label>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text">1,2..</span>
+                          </div>
+                          <input type="number" step="0.01" min="0.00" name="interesMoratorio" id="interesMoratorio" class="form-control"
+                              placeholder="Ingrese el monto de pago adicional">
+                        </div>
+                  </div>
+              </div>
+              <!-- /.form-group -->
 
-              <tr>
-                  <td>{{$indexKey+1}}</td>
-                  <td>{{$pago->codigo}}</td>
-                  <td>{{'$ ' . $pago->saldoInicial}}</td>
-                  <td>{{'$ ' . $pago->saldoFinal}}</td>
-                  <td>{{'$ ' . $pago->mora}}</td>
-                  <td>{{'$ ' . $pago->moraAcumulada}}</td>
-
-              </tr>
-              @endforeach
-              </tbody>
-              <tfoot>
-              <tr>
-                <th>N°</th>
-                <th>Codigo</th>
-                <th>Saldo inicial</th>
-                <th>Saldo final</th>
-                <th>Mora</th>
-                <th>Mora acumulada</th>
-              </tr>
-              </tfoot>
-            </table>
           </div>
-          <a class="btn btn-primary btn-flat mt-2" href="{{route('createPago', $detalle->prestamo->id)}}" style="float: right;">Agregar pago</a>
-          <br>
-        </div>
+          <div class="col-md-6 offset-sm-3 text-center">
+            <div class="form-group">
+                <label>Cuenta bancaria</label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Cuenta </span>
+                    </div>
+                    <input type="text" name="cuenta" id="cuenta" class="form-control cuenta" placeholder="Haga clic aqui para elegir la cuenta"
+                        data-toggle="modal" data-target="#cuenta-modal" readonly>
+                    <div class="modal fade" id="cuenta-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Seleccione una cuenta</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table id="clientes" class="table table-bordered table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Cuenta</th>
+                                                    <th>Nombre</th>
+                                                    <th>Accion</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($detalle->cuentas as $cuenta)
+                                                <tr>
+                                                    <td>{{$cuenta->id}}</td>
+                                                    <td>{{$cuenta->numeroCuenta}}</td>
+                                                    <td>{{$cuenta->bancoNombre}}</td>
+                                                    <td><a class="btn btn-primary btn-lg ml-4" onClick="autoFill('{{$cuenta->numeroCuenta}}'); return true;">Elegir</a>
+                                                </tr>
 
-    </div>
-  </div>
-        <!-- /.row -->
+                                                @endforeach
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                  <th>ID</th>
+                                                  <th>Cuenta</th>
+                                                  <th>Nombre</th>
+                                                  <th>Accion</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                    <br>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-group">
+                    <label>Fecha de pago</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">dd/mm/aaaa</span>
+                        </div>
+                        <input type="date" name="fecha" id="fecha" class="form-control" placeholder="Ingrese la fecha de pago de cuota">
+                    </div>
+                </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-block btn-success">Guardar</button>
+      </div>
+      </form>
     </div>
     <!-- /.card-body -->
     <div class="card-footer"></div>
-    <p class="ml-3">Área de detalle de cuotas y pagos</p>
+    <p class="ml-3">Área de detalle pagos</p>
 </div>
 </form>
+<script type="text/javascript">
+    function autoFill(cuenta) {
+        document.getElementById('cuenta').value = cuenta;
+    }
+
+</script>
 @endsection

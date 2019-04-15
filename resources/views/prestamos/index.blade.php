@@ -38,10 +38,10 @@
               <td>{{$prestamo->codigo}}</td>
               <td>{{$prestamo->fecha}}</td>
               <td>{{$prestamo->clienteNombre}}</td>
-              <td>{{$prestamo->monto}}</td>
-              <td>{{$prestamo->saldo}}</td>
+              <td>{{'$ ' . $prestamo->monto}}</td>
+              <td>{{'$ ' . $prestamo->saldo}}</td>
               <td>{{$prestamo->plazo}}</td>
-              <td>{{$prestamo->interes}}</td>
+              <td>{{$prestamo->interes . ' %'}}</td>
               <td><a class="btn btn-primary btn-flat mt-2" href="{{route('prestamoDetalle', $prestamo->id)}}"><i class="fas fa-eye"></i></a></td>
 
           </tr>
