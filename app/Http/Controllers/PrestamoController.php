@@ -82,7 +82,12 @@ class PrestamoController extends Controller
         $prestamo->save();
         //creando cuota
         $cuotas=array();
-        $fee=round($request->monto/$request->plazo, 2);
+        $power= pow(1+($request->interes/100),$request->plazo);
+        //$fee=round($request->monto/$request->plazo, 2);
+        $fee=round($request->monto*($request->interes/100)*$power/($power-1),2);
+        $TInteres=round(($fee * $request->plazo)-$request->monto,2);
+        $interesCuota=round($TInteres/12,2);
+        $abonoCapital=round($fee-$interesCuota,2);
         $plazos=$request->plazo;
         $nextDate = $request->fecha;
         $saldoInicial=$request->monto;
@@ -95,7 +100,7 @@ class PrestamoController extends Controller
                 'saldoInicial' => $saldoInicial,
                 'monto'=> $fee,
                 'saldoCuota'=>$fee,
-                'interes'=>round(($request->interes/100)*$saldoInicial,2),
+                'interes'=>$interesCuota,
                 'interesMoratorio'=>0.00,
                 'cancelado'=>false
 

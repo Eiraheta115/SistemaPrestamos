@@ -282,7 +282,7 @@
                   <td>{{$cuota->fechaPago}}</td>
                   <td>{{'$ ' . $cuota->monto}}</td>
                   <td>{{'$ ' . $cuota->saldoCuota}}</td>
-                  <td>{{$cuota->interes . ' %'}}</td>
+                  <td>{{'$ ' . $cuota->interes}}</td>
                   <td>{{$cuota->interesMoratorio . ' %'}}</td>
                   <td>
                   @if ($cuota->cancelado==false)

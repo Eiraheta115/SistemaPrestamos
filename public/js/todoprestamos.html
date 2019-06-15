@@ -1,0 +1,15 @@
+<form id="calculator" name="frmLoan">
+    <fieldset>
+        <legend class="formtitle">Cálculo de préstamos</legend>
+        <p><label class="campos">Importe</label><input id="importe" type="text" name="principal" size="15" onfocus="show_hlp_msg(prin_msg, prin_msg2)" onblur="clear_hlp_msg()" onchange="eval_field(this)" /></p>
+        <p><label class="campos">Tipo de interés</label><input type="text" name="interest" size="15" onfocus="show_hlp_msg(int_msg, int_msg2)" onblur="clear_hlp_msg()" onchange="eval_field(this)" />%</p>
+        <p><label class="campos">Plazo de amortización</label><input type="text" name="payments" size="15" onfocus="show_hlp_msg(pmt_msg, pmt_msg2)" onblur="clear_hlp_msg()" onchange="eval_field(this)" /></p>
+        <p id="radio-container"><input id="radio" onclick="this.form.payments.focus(); computeForm(this.form)" type="radio" name="pmtper" />Meses<input id="radio" onclick="this.form.payments.focus(); computeForm(this.form)" type="radio"
+              checked="checked" name="pmtper" />Años</p>
+        <p><label class="campos">Cuota mensual</label><input type="text" name="m_pymt" size="15" onfocus="show_hlp_msg(m_pmt_msg, m_pmt_msg2)" onblur="clear_hlp_msg()" /></p>
+        <p><label class="campos">Total intereses</label><input type="text" name="tot_int" size="15" onfocus="show_hlp_msg(tot_int_msg, tot_int_msg2)" onblur="clear_hlp_msg()" /></p>
+        <p><input id="buttons" onclick="computeForm(this.form)" type="button" value="Calcular" /><input id="buttons" type="reset" value="Borrar" /></p>
+        <p><input class="message" type="text" name="msg1" size="46" /><br />
+            <input class="message" type="text" name="msg2" size="46" />
+    </fieldset>
+</form>

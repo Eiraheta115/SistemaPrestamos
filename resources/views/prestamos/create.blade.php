@@ -398,18 +398,24 @@
     interes=parseFloat(i.value);
     plazoPrestamo=parseInt(plazos.value);
     montoPrestamo=parseFloat(monto.value);
-    cuota=Math.round((montoPrestamo/plazoPrestamo)*100)/100;
+    power = Math.pow(1 + (interes/100), plazoPrestamo);
+    //cuota=Math.round((montoPrestamo/plazoPrestamo)*100)/100;
+    cuota=round_it((montoPrestamo * (interes/100) * power) / (power - 1));
+    TInteres=round_it((cuota * plazoPrestamo) - montoPrestamo);
+    InteresCuota=round_it(TInteres/12,2);
+    AbonoCapital=round_it(cuota-InteresCuota,2);
+    console.log(TInteres);
     //creando la matriz de pagos
     var pagos = new Array(plazoPrestamo);
     for (var c=0; c<pagos.length; c++){
-      pagos[c]= new Array(5);
+      pagos[c]= new Array(7);
     }
     //correlativo
     x=1;
     sigCuota= new Date(fechaInicio);
     sigCuota.setDate(sigCuota.getDate()+30);
     for (p in pagos){
-      pagos[p]=[x,sigCuota.getDate()+'/'+("0" + (sigCuota.getMonth() + 1)).slice(-2)+'/'+sigCuota.getFullYear(),'$'+cuota,interes,interesMoratorio,"No"];
+      pagos[p]=[x,sigCuota.getDate()+'/'+("0" + (sigCuota.getMonth() + 1)).slice(-2)+'/'+sigCuota.getFullYear(),'$ '+AbonoCapital,'$ '+InteresCuota,'$ '+cuota,interesMoratorio+ " %","No"];
       sigCuota.setDate(sigCuota.getDate()+30);
       x=x+1;
     }
@@ -422,7 +428,7 @@
       tableRef.deleteTHead();
     }
     //Creando encabezado de tabla
-    var orderArrayHeader = ["N° Cuota","Fecha","Monto","Interes","Interes moratorio", "Pagado"];
+    var orderArrayHeader = ["N° Cuota","Fecha","Abono a capital","Interes","Monto a pagar", "Interes moratorio", "Pagado"];
     var thead = document.createElement('thead');
     //llenando la tabla de pagos
     table = document.getElementById("pagos");
@@ -441,6 +447,13 @@
         cell.innerHTML = pagos[k][j];
       }
     }
+  }
+  function round_it(amount) {
+      cents = amount * 100;
+      cents = Math.round(cents);
+      strCents = "" + cents;
+      len = strCents.length;
+      return strCents.substring(0, len - 2) + "." + strCents.substring(len - 2, len);
   }
 </script>
 
