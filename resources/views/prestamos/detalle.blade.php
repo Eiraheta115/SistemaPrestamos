@@ -81,7 +81,7 @@
                                                 <input type="text" name="tema" id="tema" class="form-control tema" placeholder="Ingrese el tema o asunto del correo">
                                             </div>
                                             <strong>Mensaje o cuerpo del correo</strong>
-                                            <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+                                            <script src="/assets/js/ckeditor.js"></script>
                                             <div class="form-group">
                                                 <textarea class="form-control cuerpo" rows="16" name="cuerpo" id="editor" placeholder="Ingrese el mensaje o cuerpo del correo"></textarea>
                                             </div>
@@ -166,7 +166,7 @@
                                                 <input type="text" name="tema" id="tema" class="form-control tema" placeholder="Ingrese el tema o asunto del correo">
                                             </div>
                                             <strong>Mensaje o cuerpo del correo</strong>
-                                            <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+                                            <script src="/assets/js/ckeditor.js"></script>
                                             <div class="form-group">
                                                 <textarea class="form-control cuerpo" rows="16" name="cuerpo" id="editor2" placeholder="Ingrese el mensaje o cuerpo del correo"></textarea>
                                             </div>
@@ -311,7 +311,7 @@
           <br>
         </div>
     </div>
-    <div class="tab-pane fade show active" id="pago" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-pane fade " id="pago" role="tabpanel" aria-labelledby="home-tab">
       <div class="card-body">
           <div class="table-responsive">
             <table id="example1" class="table table-bordered table-striped">

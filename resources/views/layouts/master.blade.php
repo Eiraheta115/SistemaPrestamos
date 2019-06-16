@@ -52,7 +52,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
       </div>
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="/assets/js/jquery.min.js"></script>
     <script>
     $(document).ready(function(){
       $("#myInput").on("keyup", function() {
