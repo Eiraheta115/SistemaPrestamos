@@ -131,7 +131,7 @@ class PagoController extends Controller
             Session::flash('Error', 'Cuota N° '.$request->correlativo[$i].': Debe pagar interes moratorio, ya que la fecha de pago esta vencida');
             return view('pagos.create', compact('detalle'));
           }
-          if ($interesMoratorio < 0.00 || $interesMoratorio > $detalle->cuota->interesMoratorio){
+          if ($interesMoratorio < 0.00 || $interesMoratorio > $detalle->cuota->monto * $prestamo->interesMoratorio){
             Session::flash('Error', 'Cuota N° '.$correlativo[$i].': El monto de interes moratorio tiene que estar en los rangos validos');
             return view('pagos.create', compact('detalle'));
           }else {
@@ -183,9 +183,16 @@ class PagoController extends Controller
           }else {
             $interesMoratorio=floatval($request->interesMoratorio[$i]);
           }
-
+          $fpago=strtotime($request->fecha);
+          $cfpago=strtotime($cuotaPagar->fechaPago);
+          if ($fpago > $cfpago) {
           $totalCuota=floatval($request->abonoCapital[$i]) + floatval($request->interes[$i]) + $interesMoratorio;
-          $cuotaPagar->saldoCuota=$cuotaPagar->saldoCuota - $totalCuota;
+          $cuotaPagar->saldoCuota=$cuotaPagar->saldoCuota + $interesMoratorio - $totalCuota;
+          }else {
+            $totalCuota=floatval($request->abonoCapital[$i]) + floatval($request->interes[$i]) + $interesMoratorio;
+            $cuotaPagar->saldoCuota=$cuotaPagar->saldoCuota - $totalCuota;
+          }
+
           $cuotaPagar->interes=$cuotaPagar->interes - floatval($request->interes[$i]);
           $cuotaPagar->interesMoratorio=$interesMoratorio;
           if ($cuotaPagar->saldoCuota==0.00){
