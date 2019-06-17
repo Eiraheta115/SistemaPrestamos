@@ -278,7 +278,7 @@
               @foreach ($detalle->prestamo->c as $indexKey =>$cuota)
 
               <tr>
-                  <td>{{$indexKey+1}}</td>
+                  <td>{{$cuota->correlativo}}</td>
                   <td>{{$cuota->fechaPago}}</td>
                   <td>{{'$ ' . $cuota->monto}}</td>
                   <td>{{'$ ' . $cuota->saldoCuota}}</td>

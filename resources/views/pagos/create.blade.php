@@ -371,9 +371,9 @@
                 </thead>
                 <tr>
                   <td><input type="text" name="correlativo[]" style="width: 50px;" value="{{$detalle->prestamo->c["0"]->correlativo}}" class="form-control name_list " readonly/></td>
-  								<td><input type="text" name="abonoCapital[]" placeholder="{{$detalle->prestamo->c["0"]->monto - $detalle->prestamo->c["0"]->interes}}" class="form-control name_list" /></td>
-                  <td><input type="text" name="interes[]" placeholder="{{$detalle->prestamo->c["0"]->interes}}" class="form-control name_list" /></td>
-                  <td><input type="text" name="interesMoratorio[]" placeholder="{{round($detalle->prestamo->c["0"]->monto * ($detalle->prestamo->interesMoratorio)/100,2)}}" class="form-control name_list" /></td>
+  								<td><input type="number" step="0.01" min="0.00" name="abonoCapital[]" placeholder="{{$detalle->prestamo->c["0"]->monto - $detalle->prestamo->c["0"]->interes}}" class="form-control name_list" /></td>
+                  <td><input type="number" step="0.01" min="0.00" name="interes[]" placeholder="{{$detalle->prestamo->c["0"]->interes}}" class="form-control name_list" /></td>
+                  <td><input type="number" step="0.01" min="0.00" name="interesMoratorio[]" placeholder="{{round($detalle->prestamo->c["0"]->monto * ($detalle->prestamo->interesMoratorio)/100,2)}}" class="form-control name_list" /></td>
 
                 </tr>
                 <tfoot>
@@ -421,7 +421,7 @@
     	$('#add').click(function(){
         if(j<vector.length){
       		i++;
-      		$('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" style="width: 50px;" name="correlativo[]" value="'+vector[j].correlativo+'" class="form-control name_list" readonly /><td><input type="text" name="abonoCapital[]" placeholder="'+(vector[j].monto-vector[j].interes)+'" class="form-control name_list" /></td><td><input type="text" name="interes[]" placeholder="'+vector[j].interes+'" class="form-control name_list" /></td><td><input type="text" name="interesMoratorio[]" placeholder="'+(round_it(vector[j].monto * im.interesMoratorio/100,2))+'" class="form-control name_list" /></td></tr>');
+      		$('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" style="width: 50px;" name="correlativo[]" value="'+vector[j].correlativo+'" class="form-control name_list" readonly /><td><input type="number" step="0.01" min="0.00" name="abonoCapital[]" placeholder="'+(vector[j].monto-vector[j].interes)+'" class="form-control name_list" /></td><td><input type="number" step="0.01" min="0.00" name="interes[]" placeholder="'+vector[j].interes+'" class="form-control name_list" /></td><td><input type="number" step="0.01" min="0.00" name="interesMoratorio[]" placeholder="'+(round_it(vector[j].monto * im.interesMoratorio/100,2))+'" class="form-control name_list" /></td></tr>');
           j++;
           console.log(j);
         }else {
