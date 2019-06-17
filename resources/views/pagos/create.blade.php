@@ -352,24 +352,29 @@
                 </div>
             </div>
             </div>
-          <div class="col-lg-10 offset-sm-1 text-center">
+          <div class="col-md-10 offset-sm-1 text-center">
             <div class="table-responsive">
-						<table class="table table-striped" id="dynamic_field">
+						<table class="table table-striped" id="dynamic_field" name="pagoCuotas">
+              <h2>Tabla de pagos de cuotas</h2>
+              <br>
+              <button type="button" name="add" id="add" class="btn btn-success" style="margin: 10px">Agregar cuota</button>
+              <button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">Quitar cuota</button>
+              <br><br>
                 <thead>
                     <tr>
                         <th>correlativo</th>
                         <th>Abono a capital</th>
                         <th>interes</th>
                         <th>interes moratorio</th>
-                        <th>Accion</th>
+
                     </tr>
                 </thead>
                 <tr>
-                  <td><input type="text" name="name[]" style="width: 50px;" value="{{$detalle->prestamo->c["0"]->correlativo}}" class="form-control name_list " readonly/></td>
-  								<td><input type="text" name="name[]" placeholder="{{$detalle->prestamo->c["0"]->monto - $detalle->prestamo->c["0"]->interes}}" class="form-control name_list" /></td>
-                  <td><input type="text" name="name[]" placeholder="{{$detalle->prestamo->c["0"]->interes}}" class="form-control name_list" /></td>
-                  <td><input type="text" name="name[]" placeholder="{{round($detalle->prestamo->c["0"]->monto * ($detalle->prestamo->interesMoratorio)/100,2)}}" class="form-control name_list" /></td>
-  								<td><button type="button" name="add" id="add" class="btn btn-success">Agregar cuota</button></td>
+                  <td><input type="text" name="correlativo[]" style="width: 50px;" value="{{$detalle->prestamo->c["0"]->correlativo}}" class="form-control name_list " readonly/></td>
+  								<td><input type="text" name="abonoCapital[]" placeholder="{{$detalle->prestamo->c["0"]->monto - $detalle->prestamo->c["0"]->interes}}" class="form-control name_list" /></td>
+                  <td><input type="text" name="interes[]" placeholder="{{$detalle->prestamo->c["0"]->interes}}" class="form-control name_list" /></td>
+                  <td><input type="text" name="interesMoratorio[]" placeholder="{{round($detalle->prestamo->c["0"]->monto * ($detalle->prestamo->interesMoratorio)/100,2)}}" class="form-control name_list" /></td>
+
                 </tr>
                 <tfoot>
                     <tr>
@@ -377,10 +382,11 @@
                         <th>Abono a capital</th>
                         <th>interes</th>
                         <th>interes moratorio</th>
-                        <th>Accion</th>
+
                     </tr>
                 </tfoot>
 						</table>
+
 					</div>
           </div>
           <button type="submit" class="btn btn-block btn-success">Guardar</button>
@@ -405,24 +411,32 @@
     }
     $(document).ready(function(){
     	var i=1;
-      var j=1;
       var vector= <?php echo json_encode($detalle->prestamo->c);?>;
       var im=<?php echo json_encode($detalle->prestamo);?>;
+      var min=<?php echo json_encode($detalle->prestamo->cmin);?>;
+      var max=<?php echo json_encode($detalle->prestamo->cmax);?>;
+      var j=1;
       console.log(vector[0].correlativo);
       console.log(im);
     	$('#add').click(function(){
-        if(j<=vector.length){
+        if(j<vector.length){
       		i++;
-      		$('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" style="width: 50px;" name="name[]" value="'+vector[j].correlativo+'" class="form-control name_list" readonly /><td><input type="text" name="name[]" placeholder="'+(vector[j].monto-vector[j].interes)+'" class="form-control name_list" /></td><td><input type="text" name="name[]" placeholder="'+vector[j].interes+'" class="form-control name_list" /></td><td><input type="text" name="name[]" placeholder="'+(round_it(vector[j].monto * im.interesMoratorio/100,2))+'" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+      		$('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" style="width: 50px;" name="correlativo[]" value="'+vector[j].correlativo+'" class="form-control name_list" readonly /><td><input type="text" name="abonoCapital[]" placeholder="'+(vector[j].monto-vector[j].interes)+'" class="form-control name_list" /></td><td><input type="text" name="interes[]" placeholder="'+vector[j].interes+'" class="form-control name_list" /></td><td><input type="text" name="interesMoratorio[]" placeholder="'+(round_it(vector[j].monto * im.interesMoratorio/100,2))+'" class="form-control name_list" /></td></tr>');
           j++;
+          console.log(j);
+        }else {
+          console.log(j);
         }
     	});
 
     	$(document).on('click', '.btn_remove', function(){
-        if (j>=1){
-      		var button_id = $(this).attr("id");
+        if (j>1){
+      		var button_id = i;
       		$('#row'+button_id+'').remove();
           j=j-1;
+          i=i-1;
+        }else {
+          console.log(j);
         }
     	});
 

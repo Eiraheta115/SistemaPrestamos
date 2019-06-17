@@ -23,22 +23,33 @@ class PagoController extends Controller
         ['TDoc', "=","Prestamos"],
       ])->first();
 
+      $cuotas=cuota::where([
+        ['prestamo_id', $id],
+        ['cancelado', false],
+        ])->get();
+
+      $min=$cuotas->min('correlativo');
+      $max=$cuotas->max('correlativo');
       $prestamo=prestamo::find($id);
-      $prestamo->c=$prestamo->cuotas;
+      $prestamo->c=$cuotas;
+      $prestamo->cmin=$min;
+      $prestamo->cmax=$max;
       $cuentas = cuenta::all();
       $cliente=clienteGarante::find($prestamo->cliente_id);
       $garante=garante::find($prestamo->garante_id);
+
       $cuota=cuota::where([
         ['prestamo_id', $prestamo->id],
         ['cancelado', false],
         ])->orderBy('id')->first();
+
       $det=json_encode(['cliente'=>$cliente,'garante'=>$garante, 'prestamo'=>$prestamo, 'cuota'=>$cuota, 'cuentas'=>$cuentas]);
       $detalle=json_decode($det);
       return view('pagos.create', compact('detalle'));
     }
 
     public function guardarPago(Request $request, $id){
-      //
+      dd($request);
       $correlativo=correlativos::where([
         ['activo',"=", true],
         ['TDoc', "=","Prestamos"],
